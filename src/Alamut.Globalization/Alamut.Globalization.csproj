@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{933AA288-AF2A-4FE2-A80A-C8C5B9806501}</ProjectGuid>
+    <ProjectGuid>{7129FD4D-9855-4665-B1CE-9B24657A551C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alamut.Data</RootNamespace>
-    <AssemblyName>Alamut.Data</AssemblyName>
+    <RootNamespace>Alamut.Globalization</RootNamespace>
+    <AssemblyName>Alamut.Globalization</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,9 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Linq.Dynamic">
-      <HintPath>..\..\packages\System.Linq.Dynamic.1.0.4\lib\net40\System.Linq.Dynamic.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,16 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Linq\IPaginatedCriteria.cs" />
-    <Compile Include="Linq\IPaginated[T].cs" />
-    <Compile Include="Linq\Paginated.cs" />
-    <Compile Include="Linq\PaginatedCriteria.cs" />
-    <Compile Include="Linq\QueryableExtensions.cs" />
-    <Compile Include="Linq\SortDescription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

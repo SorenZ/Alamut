@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Utilities", "src\Ala
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Helpers", "src\Alamut.Helpers\Alamut.Helpers.csproj", "{59208434-F1DB-4FB5-928A-48A288243210}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Globalization", "src\Alamut.Globalization\Alamut.Globalization.csproj", "{7129FD4D-9855-4665-B1CE-9B24657A551C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{59208434-F1DB-4FB5-928A-48A288243210}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59208434-F1DB-4FB5-928A-48A288243210}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59208434-F1DB-4FB5-928A-48A288243210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7129FD4D-9855-4665-B1CE-9B24657A551C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7129FD4D-9855-4665-B1CE-9B24657A551C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7129FD4D-9855-4665-B1CE-9B24657A551C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7129FD4D-9855-4665-B1CE-9B24657A551C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,5 +45,6 @@ Global
 		{933AA288-AF2A-4FE2-A80A-C8C5B9806501} = {679A2FF9-3689-4F81-8887-8841580BE521}
 		{076B6642-3DAE-461F-9F4B-7AD8688155FC} = {679A2FF9-3689-4F81-8887-8841580BE521}
 		{59208434-F1DB-4FB5-928A-48A288243210} = {679A2FF9-3689-4F81-8887-8841580BE521}
+		{7129FD4D-9855-4665-B1CE-9B24657A551C} = {679A2FF9-3689-4F81-8887-8841580BE521}
 	EndGlobalSection
 EndGlobal
