@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{679A2FF9-3689-4F81-8887-8841580BE521}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CF332DE3-E9B9-4264-B081-5F75E781C6A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Data", "src\Alamut.Data\Alamut.Data.csproj", "{933AA288-AF2A-4FE2-A80A-C8C5B9806501}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Utilities", "src\Alamut.Utilities\Alamut.Utilities.csproj", "{076B6642-3DAE-461F-9F4B-7AD8688155FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Helpers", "src\Alamut.Helpers\Alamut.Helpers.csproj", "{59208434-F1DB-4FB5-928A-48A288243210}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{933AA288-AF2A-4FE2-A80A-C8C5B9806501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{933AA288-AF2A-4FE2-A80A-C8C5B9806501}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{933AA288-AF2A-4FE2-A80A-C8C5B9806501}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{933AA288-AF2A-4FE2-A80A-C8C5B9806501}.Release|Any CPU.Build.0 = Release|Any CPU
+		{076B6642-3DAE-461F-9F4B-7AD8688155FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{076B6642-3DAE-461F-9F4B-7AD8688155FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{076B6642-3DAE-461F-9F4B-7AD8688155FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{076B6642-3DAE-461F-9F4B-7AD8688155FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59208434-F1DB-4FB5-928A-48A288243210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59208434-F1DB-4FB5-928A-48A288243210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59208434-F1DB-4FB5-928A-48A288243210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59208434-F1DB-4FB5-928A-48A288243210}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{933AA288-AF2A-4FE2-A80A-C8C5B9806501} = {679A2FF9-3689-4F81-8887-8841580BE521}
+		{076B6642-3DAE-461F-9F4B-7AD8688155FC} = {679A2FF9-3689-4F81-8887-8841580BE521}
+		{59208434-F1DB-4FB5-928A-48A288243210} = {679A2FF9-3689-4F81-8887-8841580BE521}
+	EndGlobalSection
+EndGlobal
