@@ -28,10 +28,6 @@
         /// Gets the start index according to the current page and page size.
         /// </summary>
         int StartIndex { get; }
-
-        /// <summary>
-        /// Gets or sets the sort expression.
-        /// </summary>
-        string SortExpression { get; set; }
+        
     }
 }

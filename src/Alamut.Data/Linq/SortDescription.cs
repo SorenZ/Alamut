@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Alamut.Data.Linq
+﻿namespace Alamut.Data.Linq
 {
     /// <summary>
     /// Represents a sort description.
@@ -29,56 +27,6 @@ namespace Alamut.Data.Linq
         /// </summary>
         /// <value> The name of the property. </value>
         public string PropertyName { get; set; }
-
-        /// <summary>
-        /// Parses the specified sort expression.
-        /// </summary>
-        /// <param name="sortExpression"> The sort expression. </param>
-        /// <returns> </returns>
-        public static SortDescription Parse(string sortExpression)
-        {
-            var parts = sortExpression.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length > 2 || parts.Length == 0)
-            {
-                throw new FormatException("Invalid sort expression");
-            }
-
-            var propertyName = parts[0];
-            var direction = SortDirection.Ascending;
-
-            if (parts.Length == 2 && parts[1].ToLower() == "desc")
-            {
-                direction = SortDirection.Descending;
-            }
-
-            return new SortDescription(propertyName, direction);
-        }
-
-        /// <summary>
-        /// Tries the parse.
-        /// </summary>
-        /// <param name="sortExpression"> The sort expression. </param>
-        /// <param name="sortDescription"> The sort description. </param>
-        /// <returns> </returns>
-        public static bool TryParse(string sortExpression, out SortDescription sortDescription)
-        {
-            if (string.IsNullOrWhiteSpace(sortExpression))
-            {
-                sortDescription = null;
-                return false;
-            }
-
-            try
-            {
-                sortDescription = Parse(sortExpression);
-                return true;
-            }
-            catch (FormatException)
-            {
-                sortDescription = null;
-                return false;
-            }
-        }
     }
 
     /// <summary>

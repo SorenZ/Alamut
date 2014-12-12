@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using System.Linq.Dynamic;
@@ -24,7 +23,7 @@ namespace Alamut.Data.Linq
 
             if (sortDescriptions != null)
             {
-                foreach (SortDescription sortDescription in sortDescriptions.Reverse())
+                foreach (var sortDescription in sortDescriptions.Reverse())
                 {
                     var property = sortDescription.PropertyName;
                     if (sortDescription.Direction == SortDirection.Descending)
@@ -57,7 +56,7 @@ namespace Alamut.Data.Linq
 
             if (sortDescriptions != null)
             {
-                foreach (SortDescription sortDescription in sortDescriptions.Reverse())
+                foreach (var sortDescription in sortDescriptions.Reverse())
                 {
                     var property = sortDescription.PropertyName;
                     if (sortDescription.Direction == SortDirection.Descending)
@@ -75,30 +74,6 @@ namespace Alamut.Data.Linq
             }
 
             return query.Skip(startIndex).Take(itemCount);
-        }
-
-        /// <summary>
-        /// Gets the paginated data.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="query">The query.</param>
-        /// <param name="page">The page.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="sortExpression">The sort expression.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        public static IQueryable<T> ToPage<T>(this IQueryable<T> query, int? page, int pageSize, string sortExpression)
-        {
-            if (query == null)
-            {
-                throw new ArgumentNullException("query");
-            }
-
-            return query.ToPage(
-                ((page ?? 1) - 1) * pageSize,
-                pageSize,
-                GetSortDescriptions(sortExpression).ToArray());
         }
 
         /// <summary>
@@ -136,18 +111,5 @@ namespace Alamut.Data.Linq
                 paginatedCriteria.PageSize);
         }
 
-        /// <summary>
-        /// Gets the sort descriptions from the specified criteria.
-        /// </summary>
-        /// <param name="sort">The sort.</param>
-        /// <returns></returns>
-        private static IEnumerable<SortDescription> GetSortDescriptions(string sort)
-        {
-            SortDescription sortDescription;
-            if (SortDescription.TryParse(sort, out sortDescription))
-            {
-                yield return sortDescription;
-            }
-        }
     }
 }

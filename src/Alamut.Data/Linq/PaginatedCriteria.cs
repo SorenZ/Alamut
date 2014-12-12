@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Alamut.Data.Linq
+﻿namespace Alamut.Data.Linq
 {
     /// <summary>
     /// Represents the criteria used to show a paginated data.
@@ -49,54 +45,6 @@ namespace Alamut.Data.Linq
         {
             get { return (this.CurrentPage - 1)*this.PageSize; }
         }
-
-        /// <summary>
-        /// Gets or sets the sort expression.
-        /// </summary>
-        public string SortExpression
-        {
-            get
-            {
-                if (this.SortDescriptions == null)
-                {
-                    return string.Empty;
-                }
-
-                var sortExpressions = this.SortDescriptions
-                    .Select(sd => sd.PropertyName + (sd.Direction == SortDirection.Descending ? "DESC" : string.Empty))
-                    .ToArray();
-
-                return string.Join(", ", sortExpressions);
-            }
-
-            set
-            {
-                if (value == null)
-                {
-                    this.SortDescriptions = null;
-                    return;
-                }
-
-                this.SortDescriptions = ParseSortExpression(value).ToArray();
-            }
-        }
-
-        /// <summary>
-        /// Parses the specified sort expression.
-        /// </summary>
-        /// <param name="sortExpression"></param>
-        /// <returns></returns>
-        private static IEnumerable<SortDescription> ParseSortExpression(string sortExpression)
-        {
-            var sortExpressions = sortExpression.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var sort in sortExpressions)
-            {
-                SortDescription sortDescription;
-                if (SortDescription.TryParse(sort, out sortDescription))
-                {
-                    yield return sortDescription;
-                }
-            }
-        }
+        
     }
 }
