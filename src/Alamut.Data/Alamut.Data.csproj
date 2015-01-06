@@ -30,7 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DF.Contracts">
+      <HintPath>..\..\packages\DF.Core.1.0.0\lib\net451\DF.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="DF.Core">
+      <HintPath>..\..\packages\DF.Core.1.0.0\lib\net451\DF.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Linq.Dynamic">
       <HintPath>..\..\packages\System.Linq.Dynamic.1.0.4\lib\net40\System.Linq.Dynamic.dll</HintPath>
@@ -42,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\OIdAggregate.cs" />
+    <Compile Include="Entity\OIdEntity.cs" />
     <Compile Include="Linq\IPaginatedCriteria.cs" />
     <Compile Include="Linq\IPaginated[T].cs" />
     <Compile Include="Linq\Paginated.cs" />
@@ -53,6 +68,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
