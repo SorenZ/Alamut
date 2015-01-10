@@ -12,7 +12,7 @@ namespace Alamut.Service.Helpers
     public class ServiceResult
     {
         [DataMember(Name = "status")]
-        public ResultStatus Status { get; set; }
+        public ResultStatus Status { get; set; } 
 
         [DataMember(Name = "message")]
         public string Message { get; set; }
