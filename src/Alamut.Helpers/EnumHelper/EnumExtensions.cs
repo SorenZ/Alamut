@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace Alamut.Helpers.EnumHelper
 {
@@ -9,7 +10,7 @@ namespace Alamut.Helpers.EnumHelper
         /// </summary>
         /// <param name="enumValue"></param>
         /// <returns></returns>
-        public static string GetDescription(this System.Enum enumValue)
+        public static string GetDescription(this Enum enumValue)
         {
             var fi = enumValue.GetType().GetField(enumValue.ToString());
 

@@ -53,7 +53,7 @@ namespace Alamut.Service.Helpers
         {
             return new ServiceResult
             {
-                Status = ResultStatus.Error,
+                Status = ResultStatus.Exception,
                 Message = ex.GetBaseException().Message
             };
         }
@@ -92,7 +92,7 @@ namespace Alamut.Service.Helpers
         {
             return new ServiceResult<T>
             {
-                Status = ResultStatus.Error,
+                Status = ResultStatus.Exception,
                 Message = message
             };
         }
@@ -127,5 +127,11 @@ namespace Alamut.Service.Helpers
         /// the Service executed successfully 
         /// </summary>
         Successful = 5,
+
+        /// <summary>
+        /// determine that an exception occurred
+        /// the exception detail provided in message
+        /// </summary>
+        Exception = 6
     }
 }
