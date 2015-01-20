@@ -5,8 +5,8 @@
     /// determine the response for an specific requrest
     /// </summary>
     /// <typeparam name="TRequest"></typeparam>
-    public interface IResponse<TRequest> where TRequest : IRequest, 
-        IResponse
+    public interface IResponse<TRequest> : IResponse
+        where TRequest : IRequest
     { }
 
     /// <summary>

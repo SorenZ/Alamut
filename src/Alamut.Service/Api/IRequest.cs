@@ -5,6 +5,7 @@
     /// </summary>
     /// <typeparam name="TRespond"></typeparam>
     public interface IRequest<TRespond> : IRequest
+        where TRespond : IResponse
     { }
 
     /// <summary>
