@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Alamut.Service.Api;
 
 namespace Alamut.Service.Helpers
 {
@@ -9,7 +10,7 @@ namespace Alamut.Service.Helpers
     /// </summary>
     /// <remarks>result for void Service</remarks>
     [DataContract]
-    public class ServiceResult
+    public class ServiceResult : IResponse
     {
         [DataMember(Name = "status")]
         public ResultStatus Status { get; set; } 

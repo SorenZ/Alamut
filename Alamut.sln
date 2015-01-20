@@ -20,14 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Security", "src\Alamut.Security\Alamut.Security.csproj", "{E759F353-9AA0-43DA-98AD-86C8CA7F5A0B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{8F5D6BA2-5CEC-4770-B47C-D27127108A10}"
-	ProjectSection(SolutionItems) = preProject
-		build\Alamut.Data.dll = build\Alamut.Data.dll
-		build\Alamut.Globalization.dll = build\Alamut.Globalization.dll
-		build\Alamut.Helpers.dll = build\Alamut.Helpers.dll
-		build\Alamut.Security.dll = build\Alamut.Security.dll
-		build\Alamut.Service.dll = build\Alamut.Service.dll
-		build\Alamut.Utilities.dll = build\Alamut.Utilities.dll
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
