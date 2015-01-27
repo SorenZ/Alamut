@@ -1,11 +1,13 @@
-﻿namespace Alamut.Service.Api
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace Alamut.Service.Api
 {
     /// <summary>
     /// determine the request body in api negotiation
     /// </summary>
     /// <typeparam name="TRespond"></typeparam>
     public interface IRequest<TRespond> : IRequest
-        where TRespond : IResponse
     { }
 
     /// <summary>

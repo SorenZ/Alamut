@@ -50,12 +50,13 @@ namespace Alamut.Service.Helpers
         /// </summary>
         /// <param name="ex">the exception</param>
         /// <returns>Error ServiceResult</returns>
-        public static ServiceResult Error(Exception ex)
+        public static ServiceResult Exception(Exception ex)
         {
             return new ServiceResult
             {
                 Status = ResultStatus.Exception,
-                Message = ex.GetBaseException().Message
+                Message = ex.GetExceptionMessages()
+                //Message = ex.ToString()
             };
         }
     }

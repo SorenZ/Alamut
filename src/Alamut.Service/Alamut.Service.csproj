@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\IHeader.cs" />
     <Compile Include="Api\IRequest.cs" />
     <Compile Include="Api\IResponse.cs" />
+    <Compile Include="Helpers\ExceptionExtension.cs" />
     <Compile Include="Helpers\ServiceResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
