@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
-namespace Alamut.Helpers.EnumHelper
+namespace Alamut.Helpers.Enum
 {
     public static class EnumExtensions
     {
@@ -10,7 +9,7 @@ namespace Alamut.Helpers.EnumHelper
         /// </summary>
         /// <param name="enumValue"></param>
         /// <returns></returns>
-        public static string GetDescription(this Enum enumValue)
+        public static string GetDescription(this System.Enum enumValue)
         {
             var fi = enumValue.GetType().GetField(enumValue.ToString());
 
