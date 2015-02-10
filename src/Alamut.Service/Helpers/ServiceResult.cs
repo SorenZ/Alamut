@@ -108,7 +108,7 @@ namespace Alamut.Service.Helpers
         /// <summary>
         /// the service got the message and execute it.
         /// </summary>
-        Okay = 1,
+        Okay = 0,
 
         /// <summary>
         /// the Service executed and there is some information about it.
@@ -134,6 +134,11 @@ namespace Alamut.Service.Helpers
         /// determine that an exception occurred
         /// the exception detail provided in message
         /// </summary>
-        Exception = 6
+        Exception = 6,
+
+        /// <summary>
+        /// the request is not valid.
+        /// </summary>
+        ValidationFailed = 7
     }
 }
