@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alamut.Data.Linq
+namespace Alamut.Data.Paging
 {
     /// <summary>
     /// Represents a paginated data.

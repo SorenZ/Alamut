@@ -137,8 +137,13 @@ namespace Alamut.Service.Helpers
         Exception = 6,
 
         /// <summary>
-        /// the request is not valid.
+        /// the request for service is not valid.
         /// </summary>
-        ValidationFailed = 7
+        ValidationFailed = 7,
+
+        /// <summary>
+        /// the permission is denied for access service
+        /// </summary>
+        PermissionDenied = 8
     }
 }

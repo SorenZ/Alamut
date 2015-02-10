@@ -1,4 +1,6 @@
-﻿namespace Alamut.Data.Linq
+﻿using Alamut.Data.Sorting;
+
+namespace Alamut.Data.Paging
 {
     /// <summary>
     /// Represents the criteria used to show a paginated data.

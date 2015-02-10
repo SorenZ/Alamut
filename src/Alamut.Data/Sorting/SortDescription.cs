@@ -1,4 +1,4 @@
-﻿namespace Alamut.Data.Linq
+﻿namespace Alamut.Data.Sorting
 {
     /// <summary>
     /// Represents a sort description.
