@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Alamut.Helpers.EnumHelper
+﻿namespace Alamut.Helpers.Enum
 {
     public static class StringExtensions
     {
@@ -12,7 +10,7 @@ namespace Alamut.Helpers.EnumHelper
         /// <returns>enum item</returns>
         public static T ToEnum<T>(this string enumString)
         {
-            return (T)Enum.Parse(typeof(T), enumString);
+            return (T)System.Enum.Parse(typeof(T), enumString);
         }
     }
 }

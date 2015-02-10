@@ -40,13 +40,13 @@ namespace Alamut.Security
     public class PasswordHash
     {
         // The following constants may be changed without breaking existing hashes.
-        public const int SALT_BYTE_SIZE = 24;
-        public const int HASH_BYTE_SIZE = 24;
-        public const int PBKDF2_ITERATIONS = 1000;
+        const int SALT_BYTE_SIZE = 24;
+        const int HASH_BYTE_SIZE = 24;
+        const int PBKDF2_ITERATIONS = 1000;
 
-        public const int ITERATION_INDEX = 0;
-        public const int SALT_INDEX = 1;
-        public const int PBKDF2_INDEX = 2;
+        const int ITERATION_INDEX = 0;
+        const int SALT_INDEX = 1;
+        const int PBKDF2_INDEX = 2;
 
         /// <summary>
         /// Creates a salted PBKDF2 hash of the password.

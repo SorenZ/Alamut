@@ -40,9 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumHelper\EnumExtensions.cs" />
-    <Compile Include="EnumHelper\StringExtensions.cs" />
+    <Compile Include="Attribute\Helper.cs" />
+    <Compile Include="Enum\EnumExtensions.cs" />
+    <Compile Include="Enum\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Const\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
