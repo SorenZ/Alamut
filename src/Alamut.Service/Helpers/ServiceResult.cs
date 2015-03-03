@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Alamut.Service.Api;
 
@@ -57,6 +58,21 @@ namespace Alamut.Service.Helpers
                 Status = ResultStatus.Exception,
                 Message = ex.GetExceptionMessages()
                 //Message = ex.ToString()
+            };
+        }
+
+        /// <summary>
+        /// return a ServiceResult from validationResult 
+        ///     that contains validation message in JSON fomat.
+        /// </summary>
+        /// <param name="fieldMessages">List of { propertyName, validationMessage }</param>
+        /// <returns></returns>
+        public static dynamic ValidationFailed(Dictionary<string, string> fieldMessages)
+        {
+            return new
+            {
+                Status = ResultStatus.ValidationFailed,
+                Message = fieldMessages
             };
         }
     }
