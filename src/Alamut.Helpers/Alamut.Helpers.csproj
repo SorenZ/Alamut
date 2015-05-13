@@ -43,6 +43,7 @@
     <Compile Include="Attribute\Helper.cs" />
     <Compile Include="Enum\EnumExtensions.cs" />
     <Compile Include="Enum\StringExtensions.cs" />
+    <Compile Include="Object\ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

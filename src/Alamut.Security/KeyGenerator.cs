@@ -18,14 +18,14 @@ namespace Alamut.Security
             return Base36.Encode((ulong) DateTime.Now.Ticks);
         }
 
-        /// <summary>
+        /// <summary> 
         /// generate base-36 key by string hash code
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
         public static string GenerateKeyByStr(string key)
         {
-            return Base36.Encode(Math.Abs(key.GetHashCode()));
+            return Base36.Encode(Math.Abs(key.GetHashCode())); 
         }
 
         /// <summary>
