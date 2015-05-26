@@ -41,14 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attribute\Helper.cs" />
+    <Compile Include="Const\ConstantUtility.cs" />
     <Compile Include="Enum\EnumExtensions.cs" />
     <Compile Include="Enum\StringExtensions.cs" />
     <Compile Include="Object\ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Const\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y /d "$(TargetPath)"   "$(SolutionDir)build\"</PostBuildEvent>

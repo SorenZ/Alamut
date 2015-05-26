@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-namespace Alamut.Service.Api
+﻿namespace Alamut.Service.Api
 {
     /// <summary>
     /// determine the request body in api negotiation
