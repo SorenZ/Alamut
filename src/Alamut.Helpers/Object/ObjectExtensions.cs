@@ -15,5 +15,15 @@ namespace Alamut.Helpers.Object
             if (obj == null)
                 throw new NullReferenceException(message);
         }
+
+        /// <summary>
+        /// determine weather is object null or not
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>true if object null</returns>
+        public static bool IsNull(this object obj)
+        {
+            return obj == null;
+        }
     }
 }
