@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Linq\LambdaExpressions.cs" />
     <Compile Include="Linq\QueryExtensions.cs" />
     <Compile Include="Paging\IPaginatedCriteria.cs" />
     <Compile Include="Paging\IPaginated[T].cs" />
