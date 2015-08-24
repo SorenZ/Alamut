@@ -49,5 +49,19 @@ namespace Alamut.Data.Linq
         {
             return condition ? source.Where(trueExpression) : source.Where(falseExpression);
         }
+
+        /// <summary>
+        /// conditional 'where', execute expressioin when condition is true
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="condition"></param>
+        /// <param name="trueExpression"></param>
+        /// <returns></returns>
+        public static IQueryable<T> WhereIf<T>(this IQueryable<T> source,
+            bool condition, Expression<Func<T, bool>> trueExpression)
+        {
+            return condition ? source.Where(trueExpression) : source;
+        }
     }
 }
