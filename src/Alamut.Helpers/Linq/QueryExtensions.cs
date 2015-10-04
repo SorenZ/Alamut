@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alamut.Data.Linq
+namespace Alamut.Helpers.Linq
 {
     /// <summary>
     /// IQueryable Helpers
@@ -63,5 +65,7 @@ namespace Alamut.Data.Linq
         {
             return condition ? source.Where(trueExpression) : source;
         }
+
+        
     }
 }

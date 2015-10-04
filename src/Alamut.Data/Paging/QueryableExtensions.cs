@@ -75,7 +75,7 @@ namespace Alamut.Data.Paging
         /// <returns></returns>
         public static IPaginated<T> ToPaginated<T>(this IQueryable<T> query, IPaginatedCriteria paginatedCriteria)
         {
-            return new Paginated<T>(
+                return new Paginated<T>(
                 query.ToPage(paginatedCriteria.StartIndex, paginatedCriteria.PageSize, paginatedCriteria.SortDescriptions),
                 query.Count(),
                 paginatedCriteria.CurrentPage,
