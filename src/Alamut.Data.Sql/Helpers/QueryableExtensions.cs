@@ -44,7 +44,7 @@ namespace Alamut.Data.Sql.Helpers
             }
 
             return query.Skip(startIndex).Take(itemCount);
-        }
+        } 
 
         /// <summary>
         /// Gets the paginated data.
