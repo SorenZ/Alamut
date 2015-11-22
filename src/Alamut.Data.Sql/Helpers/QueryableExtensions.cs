@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Dynamic;
+using Alamut.Data.Paging;
 using Alamut.Data.Sorting;
 
-namespace Alamut.Data.Paging
+namespace Alamut.Data.Sql.Helpers
 {
     public static class QueryableExtensions
     {
-        
-
         /// <summary>
         /// Gets the paginated data.
         /// </summary>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{679A2FF9-3689-4F81-8887-8841580BE521}"
 EndProject
@@ -22,6 +22,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{8F5D6BA2-5CEC-4770-B47C-D27127108A10}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "test\Tester\Tester.csproj", "{D6C290FA-218D-452E-B00B-87E0A7ADCD3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Data.MongoDb", "src\Alamut.Data.MongoDb\Alamut.Data.MongoDb.csproj", "{79A74A81-E9EA-4131-B2BD-A03927E2C81D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Data.Sql", "src\Alamut.Data.Sql\Alamut.Data.Sql.csproj", "{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{D6C290FA-218D-452E-B00B-87E0A7ADCD3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6C290FA-218D-452E-B00B-87E0A7ADCD3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6C290FA-218D-452E-B00B-87E0A7ADCD3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79A74A81-E9EA-4131-B2BD-A03927E2C81D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A74A81-E9EA-4131-B2BD-A03927E2C81D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A74A81-E9EA-4131-B2BD-A03927E2C81D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A74A81-E9EA-4131-B2BD-A03927E2C81D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +81,7 @@ Global
 		{7EC10230-A7B4-4680-A03B-4D0C7216EB08} = {679A2FF9-3689-4F81-8887-8841580BE521}
 		{E759F353-9AA0-43DA-98AD-86C8CA7F5A0B} = {679A2FF9-3689-4F81-8887-8841580BE521}
 		{D6C290FA-218D-452E-B00B-87E0A7ADCD3E} = {CF332DE3-E9B9-4264-B081-5F75E781C6A4}
+		{79A74A81-E9EA-4131-B2BD-A03927E2C81D} = {679A2FF9-3689-4F81-8887-8841580BE521}
+		{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28} = {679A2FF9-3689-4F81-8887-8841580BE521}
 	EndGlobalSection
 EndGlobal
