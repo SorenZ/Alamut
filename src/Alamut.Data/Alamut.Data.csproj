@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\IEntity.cs" />
+    <Compile Include="NoSql\Criteria.cs" />
     <Compile Include="NoSql\IRepository.cs" />
     <Compile Include="Paging\IPaginatedCriteria.cs" />
     <Compile Include="Paging\IPaginated[T].cs" />
