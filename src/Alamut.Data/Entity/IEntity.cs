@@ -2,7 +2,8 @@
 {
 
     /// <summary>
-    /// provide by type of Entity 
+    /// provide base interface of an entity
+    /// it's required for work with repository 
     /// Id is mandetory
     /// the type of Id is string
     /// </summary>
@@ -10,9 +11,10 @@
     { }
 
     /// <summary>
-    /// provide by type of Entity 
+    /// provide base interface of an entity
+    /// it's required for work with repository 
     /// Id is mandetory
-    /// the type of will define by type parameter
+    /// the type of Id will define by type parameter
     /// </summary>
     public interface IEntity<TKey>
     {

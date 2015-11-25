@@ -8,7 +8,7 @@ namespace Alamut.Data.NoSql
     /// - predicate
     /// - sorts
     /// </summary>
-    public class Criteria
+    public class DynammicCriteria
     {
         /// <summary>
         /// projection

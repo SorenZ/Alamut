@@ -121,7 +121,7 @@ namespace Alamut.Data.NoSql
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        object Get(Criteria criteria);
+        object Get(DynammicCriteria criteria);
 
         /// <summary>
         /// get all items 
@@ -163,23 +163,22 @@ namespace Alamut.Data.NoSql
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        IEnumerable<object> GetAll(Criteria criteria);
+        IEnumerable<object> GetAll(DynammicCriteria criteria);
 
         /// <summary>
         /// get items paginated by criteria
         /// </summary>
-        /// <param name="paginated"></param>
+        /// <param name="criteria"></param>
         /// <param name="isDeleted"></param>
         /// <returns></returns>
-        IPaginated<TEntity> GetPaginated(PaginatedCriteria paginated, bool? isDeleted = null);
+        IPaginated<TEntity> GetPaginated(PaginatedCriteria criteria, bool? isDeleted = null);
 
         /// <summary>
-        /// get items paginated and filterd by criteria(s)
+        /// get items paginated and filterd and sorted by criteria(s)
         /// </summary>
-        /// <param name="paginated"></param>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        IPaginated<object> GenericGetPaginated(PaginatedCriteria paginated, Criteria criteria);
+        IPaginated<object> GetPaginated(DynamicPaginatedCriteria criteria);
     }
 
 
