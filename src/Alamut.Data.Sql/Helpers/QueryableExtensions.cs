@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Dynamic;
-using Alamut.Data.Sorting;
+using Alamut.Data.Paging;
 
-namespace Alamut.Data.Paging
+namespace Alamut.Data.Sql.Helpers
 {
     public static class QueryableExtensions
     {
-        
-
         /// <summary>
         /// Gets the paginated data.
         /// </summary>
@@ -16,36 +13,17 @@ namespace Alamut.Data.Paging
         /// <param name="query"> The query. </param>
         /// <param name="startIndex"> Start index of the row. </param>
         /// <param name="itemCount"> Size of the page. </param>
-        /// <param name="sortDescriptions"> The sort descriptions. </param>
         /// <returns> </returns>
-        public static IQueryable<T> ToPage<T>(this IQueryable<T> query, int startIndex, int itemCount, SortDescription[] sortDescriptions)
+        public static IQueryable<T> ToPage<T>(this IQueryable<T> query, int startIndex, int itemCount)
         {
             if (query == null)
-            {
                 throw new ArgumentNullException("query");
-            }
-
-            if (sortDescriptions != null)
-            {
-                foreach (var sortDescription in sortDescriptions.Reverse())
-                {
-                    var property = sortDescription.PropertyName;
-                    if (sortDescription.Direction == SortDirection.Descending)
-                    {
-                        property += " DESC";
-                    }
-
-                    query = query.OrderBy(property);
-                }
-            }
 
             if (startIndex < 0)
-            {
                 startIndex = 0;
-            }
 
             return query.Skip(startIndex).Take(itemCount);
-        }
+        } 
 
         /// <summary>
         /// Gets the paginated data.
@@ -58,12 +36,7 @@ namespace Alamut.Data.Paging
         /// <exception cref="System.ArgumentNullException"></exception>
         public static IQueryable<T> ToPage<T>(this IQueryable<T> query, IPaginatedCriteria paginatedCriteria)
         {
-            if (query == null)
-            {
-                throw new ArgumentNullException("query");
-            }
-
-            return query.ToPage(paginatedCriteria.StartIndex, paginatedCriteria.PageSize, paginatedCriteria.SortDescriptions);
+            return query.ToPage(paginatedCriteria.StartIndex, paginatedCriteria.PageSize);
         }
 
         /// <summary>
@@ -75,8 +48,8 @@ namespace Alamut.Data.Paging
         /// <returns></returns>
         public static IPaginated<T> ToPaginated<T>(this IQueryable<T> query, IPaginatedCriteria paginatedCriteria)
         {
-                return new Paginated<T>(
-                query.ToPage(paginatedCriteria.StartIndex, paginatedCriteria.PageSize, paginatedCriteria.SortDescriptions),
+            return new Paginated<T>(
+                query.ToPage(paginatedCriteria.StartIndex, paginatedCriteria.PageSize),
                 query.Count(),
                 paginatedCriteria.CurrentPage,
                 paginatedCriteria.PageSize);

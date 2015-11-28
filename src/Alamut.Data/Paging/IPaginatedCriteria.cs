@@ -1,6 +1,4 @@
-﻿using Alamut.Data.Sorting;
-
-namespace Alamut.Data.Paging
+﻿namespace Alamut.Data.Paging
 {
     /// <summary>
     /// Represents the criteria used to show a paginated data.
@@ -24,7 +22,7 @@ namespace Alamut.Data.Paging
         /// <summary>
         /// Gets or sets the sort descriptions.
         /// </summary>
-        SortDescription[] SortDescriptions { get; set; }
+        //SortDescription[] SortDescriptions { get; set; }
 
         /// <summary>
         /// Gets the start index according to the current page and page size.

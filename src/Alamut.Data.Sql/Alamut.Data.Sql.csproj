@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{933AA288-AF2A-4FE2-A80A-C8C5B9806501}</ProjectGuid>
+    <ProjectGuid>{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alamut.Data</RootNamespace>
-    <AssemblyName>Alamut.Data</AssemblyName>
+    <RootNamespace>Alamut.Data.Sql</RootNamespace>
+    <AssemblyName>Alamut.Data.Sql</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,7 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,23 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\IEntity.cs" />
-    <Compile Include="NoSql\DynamicPaginatedCriteria.cs" />
-    <Compile Include="NoSql\DynammicCriteria.cs" />
-    <Compile Include="NoSql\IRepository.cs" />
-    <Compile Include="Paging\IPaginatedCriteria.cs" />
-    <Compile Include="Paging\IPaginated[T].cs" />
-    <Compile Include="Paging\Paginated.cs" />
-    <Compile Include="Paging\PaginatedCriteria.cs" />
+    <Compile Include="Helpers\QueryableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Linq\" />
+    <ProjectReference Include="..\Alamut.Data\Alamut.Data.csproj">
+      <Project>{933aa288-af2a-4fe2-a80a-c8c5b9806501}</Project>
+      <Name>Alamut.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy /y /d "$(TargetPath)"   "$(SolutionDir)build\"</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
