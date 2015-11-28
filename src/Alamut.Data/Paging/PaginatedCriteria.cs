@@ -1,5 +1,4 @@
-﻿using Alamut.Data.Linq;
-using Alamut.Data.Sorting;
+﻿using Alamut.Data.Sorting;
 
 namespace Alamut.Data.Paging
 {
