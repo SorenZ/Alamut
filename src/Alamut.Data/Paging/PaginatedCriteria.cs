@@ -34,11 +34,6 @@
         public int PageSize { get; set; }
 
         /// <summary>
-        /// Gets or sets the sort descriptions.
-        /// </summary>
-        //public SortDescription[] SortDescriptions { get; set; }
-
-        /// <summary>
         /// Gets the start index according to the current page and page size.
         /// </summary>
         public int StartIndex

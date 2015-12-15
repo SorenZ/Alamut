@@ -34,10 +34,10 @@ namespace Alamut.Data.Sql.Helpers
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">query</exception>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public static IQueryable<T> ToPage<T>(this IQueryable<T> query, IPaginatedCriteria paginatedCriteria)
-        {
-            return query.ToPage(paginatedCriteria.StartIndex, paginatedCriteria.PageSize);
-        }
+        //public static IQueryable<T> ToPage<T>(this IQueryable<T> query, IPaginatedCriteria paginatedCriteria)
+        //{
+        //    return query.ToPage(paginatedCriteria.StartIndex, paginatedCriteria.PageSize);
+        //}
 
         /// <summary>
         /// Creates an <see cref="IPaginated{T}" /> instance from the specified query.

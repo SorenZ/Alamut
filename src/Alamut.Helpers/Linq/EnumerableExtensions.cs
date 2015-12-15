@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alamut.Helpers.Linq
 {
@@ -21,6 +19,46 @@ namespace Alamut.Helpers.Linq
         public static bool IsAny<T>(this IEnumerable<T> list)
         {
             return list != null && list.Any();
+        }
+
+        /// <summary>
+        /// sort an enumerator by list of items(ids)
+        /// </summary>
+        /// <typeparam name="TSource">type of object that needs to be sorted</typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="sources">an enumerator that be sorted</param>
+        /// <param name="ids">list of item to show how sort enumerator</param>
+        /// <param name="idSelector">select the key of item for comparing with list of ids</param>
+        /// <returns>sorted source by ids</returns>
+        public static IEnumerable<TSource> SortBy<TSource, TKey>(this IEnumerable<TSource> sources
+            , IEnumerable<TKey> ids, Func<TSource, TKey> idSelector)
+        {
+            return from id in ids
+                   join p in sources
+                       on id equals idSelector.Invoke(p)
+                   select p;
+        }
+
+        /// <summary>
+        /// remove element at collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="predicate"></param>
+        /// <remarks>
+        /// based on : http://stackoverflow.com/a/653602/428061
+        /// </remarks>
+        public static void RemoveAll<T>(this ICollection<T> collection, Func<T, bool> predicate)
+        {
+            for (var i = 0; i < collection.Count; i++)
+            {
+                var element = collection.ElementAt(i);
+                if (predicate(element))
+                {
+                    collection.Remove(element);
+                    i--;
+                }
+            }
         }
 
         /// <summary>
