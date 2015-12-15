@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 
@@ -66,17 +65,20 @@ namespace Alamut.Helpers.Linq
         /// </summary>
         /// <typeparam name="TSource"></typeparam>
         /// <param name="source"></param>
-        /// <param name="input"></param>
         /// <param name="fields"></param>
         /// <returns></returns>
         public static IEnumerable<object> DynamicSelect<TSource>(this IEnumerable<TSource> source, 
-            object input,
             IEnumerable<string> fields)
         {
-            return source.Select(s => DynamicProjection(input, fields));
+            return source.Select(s => DynamicProjection(s, fields));
         }
 
-
+        /// <summary>
+        /// get properties list object(s) from the input 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="properties"></param>
+        /// <returns></returns>
         static object DynamicProjection(object input, IEnumerable<string> properties)
         {
             var type = input.GetType();
