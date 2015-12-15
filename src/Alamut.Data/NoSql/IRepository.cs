@@ -1,47 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Alamut.Data.Entity;
 using Alamut.Data.Paging;
 
 namespace Alamut.Data.NoSql
 {
-    public interface IRepository<TEntity> : IRepository<TEntity,string>
-        where TEntity : IEntity
+    public interface IRepository<TDocument> where TDocument : IEntity
     {
+        /// <summary>
+        /// Creates a queryable source of documents
+        /// </summary>
+        IQueryable<TDocument> Queryable { get; }
+
         /// <summary>
         /// create an item
         /// </summary>
         /// <param name="entity"></param>
-        void Create(TEntity entity);
+        void Create(TDocument entity);
 
 
         /// <summary>
         /// update item total value
         /// </summary>
         /// <param name="entity"></param>
-        void Update(TEntity entity);
+        void Update(TDocument entity);
 
         /// <summary>
         /// update an item (one field) by expression member selector by id
         /// </summary>
-        /// <typeparam name="TMember"></typeparam>
+        /// <typeparam name="TField"></typeparam>
         /// <param name="id"></param>
         /// <param name="memberExpression"></param>
         /// <param name="value"></param>
-        void UpdateOne<TMember>(string id, Expression<Func<TEntity, TMember>> memberExpression, TMember value);
+        /// <remarks>
+        /// Even if multiple documents match the filter, only one will be updated because we used UpdateOne
+        /// </remarks>
+        void UpdateOne<TField>(string id, 
+            Expression<Func<TDocument, TField>> memberExpression, 
+            TField value);
 
         /// <summary>
         /// update an item (one field) by expression member selector (select item by predicate)
         /// </summary>
         /// <typeparam name="TFilter"></typeparam>
-        /// <typeparam name="TMember"></typeparam>
+        /// <typeparam name="TField"></typeparam>
         /// <param name="filterExpression"></param>
-        /// <param name="filterValue"></param>
         /// <param name="memberExpression"></param>
-        /// <param name="updateValue"></param>
-        void UpdateOne<TFilter, TMember>(Expression<Func<TEntity, TFilter>> filterExpression, TFilter filterValue,
-            Expression<Func<TEntity, TMember>> memberExpression, TMember updateValue);
+        /// <param name="value"></param>
+        /// <remarks>
+        /// Even if multiple documents match the filter, only one will be updated because we used UpdateOne
+        /// </remarks>
+        void UpdateOne<TFilter, TField>(Expression<Func<TDocument, bool>> filterExpression, 
+            Expression<Func<TDocument, TField>> memberExpression, TField value);
 
         /// <summary>
         /// update fieldset in the databse by provided id
@@ -58,7 +70,7 @@ namespace Alamut.Data.NoSql
         /// <param name="id"></param>
         /// <param name="memberExpression"></param>
         /// <param name="value"></param>
-        void AddToList<TValue>(string id, Expression<Func<TEntity, IEnumerable<TValue>>> memberExpression, TValue value);
+        void AddToList<TValue>(string id, Expression<Func<TDocument, IEnumerable<TValue>>> memberExpression, TValue value);
 
         /// <summary>
         /// remove an item from a list (all item if same)
@@ -67,14 +79,21 @@ namespace Alamut.Data.NoSql
         /// <param name="id"></param>
         /// <param name="memberExpression"></param>
         /// <param name="value"></param>
-        void RemoveFromList<TValue>(string id, Expression<Func<TEntity, IEnumerable<TValue>>> memberExpression, TValue value);
+        void RemoveFromList<TValue>(string id, Expression<Func<TDocument, IEnumerable<TValue>>> memberExpression, TValue value);
 
 
         /// <summary>
-        /// delete an item by id
+        /// Deletes an item by id.
         /// </summary>
         /// <param name="id"></param>
         void Delete(string id);
+
+        /// <summary>
+        /// Deletes multiple documents.
+        /// </summary>
+        /// <param name="predicate">represent expression to filter delete</param>
+        void DeleteMany(Expression<Func<TDocument, bool>> predicate);
+
 
         /// <summary>
         /// set is deleted to true by id
@@ -87,14 +106,14 @@ namespace Alamut.Data.NoSql
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        TEntity Get(string id);
+        TDocument Get(string id);
 
         /// <summary>
         /// get an item by predicate
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        TEntity Get(Expression<Func<TEntity, bool>> predicate);
+        TDocument Get(Expression<Func<TDocument, bool>> predicate);
 
         /// <summary>
         /// get an item (selected fields bye projection) by id
@@ -103,7 +122,7 @@ namespace Alamut.Data.NoSql
         /// <param name="id"></param>
         /// <param name="projection"></param>
         /// <returns></returns>
-        TResult Get<TResult>(string id, Expression<Func<TEntity, TResult>> projection);
+        TResult Get<TResult>(string id, Expression<Func<TDocument, TResult>> projection);
 
         /// <summary>
         /// get an item (selected fields bye projection) by predicate
@@ -112,8 +131,8 @@ namespace Alamut.Data.NoSql
         /// <param name="predicate"></param>
         /// <param name="projection"></param>
         /// <returns></returns>
-        TResult Get<TResult>(Expression<Func<TEntity, bool>> predicate, 
-            Expression<Func<TEntity, TResult>> projection);
+        TResult Get<TResult>(Expression<Func<TDocument, bool>> predicate, 
+            Expression<Func<TDocument, TResult>> projection);
 
         /// <summary>
         /// get one item by filters
@@ -131,7 +150,7 @@ namespace Alamut.Data.NoSql
         /// null -> not important 
         /// </param>
         /// <returns></returns>
-        List<TEntity> GetAll(bool? isDeleted = null);
+        List<TDocument> GetAll(bool? isDeleted = null);
 
 
         /// <summary>
@@ -139,14 +158,14 @@ namespace Alamut.Data.NoSql
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        List<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate);
+        List<TDocument> GetMany(Expression<Func<TDocument, bool>> predicate);
 
         /// <summary>
         /// get a list of items by ids
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        List<TEntity> GetAll(IEnumerable<string> ids);
+        List<TDocument> GetMany(IEnumerable<string> ids);
 
         /// <summary>
         /// get a list of items (selected fields) by predicate
@@ -155,15 +174,15 @@ namespace Alamut.Data.NoSql
         /// <param name="predicate"></param>
         /// <param name="projection"></param>
         /// <returns></returns>
-        List<TResult> GetAll<TResult>(Expression<Func<TEntity, bool>> predicate, 
-            Expression<Func<TEntity, TResult>> projection);
+        List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate, 
+            Expression<Func<TDocument, TResult>> projection);
 
         /// <summary>
         /// get items (fields or all of them) by filters 
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        IEnumerable<object> GetAll(DynammicCriteria criteria);
+        IEnumerable<object> GetMany(DynammicCriteria criteria);
 
         /// <summary>
         /// get items paginated by criteria
@@ -171,7 +190,7 @@ namespace Alamut.Data.NoSql
         /// <param name="criteria"></param>
         /// <param name="isDeleted"></param>
         /// <returns></returns>
-        IPaginated<TEntity> GetPaginated(PaginatedCriteria criteria, bool? isDeleted = null);
+        IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria, bool? isDeleted = null);
 
         /// <summary>
         /// get items paginated and filterd and sorted by criteria(s)
@@ -182,9 +201,9 @@ namespace Alamut.Data.NoSql
     }
 
 
-    public interface IRepository<TEntity, TKey>
-        where TEntity : IEntity<TKey>
-    {
+    //public interface IRepository<TEntity, TKey>
+    //    where TEntity : IEntity<TKey>
+    //{
 
-    }
+    //}
 }

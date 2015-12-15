@@ -26,20 +26,6 @@ namespace Alamut.Data.Sql.Helpers
         } 
 
         /// <summary>
-        /// Gets the paginated data.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="query">The query.</param>
-        /// <param name="paginatedCriteria">The paginated criteria.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">query</exception>
-        /// <exception cref="System.ArgumentNullException"></exception>
-        //public static IQueryable<T> ToPage<T>(this IQueryable<T> query, IPaginatedCriteria paginatedCriteria)
-        //{
-        //    return query.ToPage(paginatedCriteria.StartIndex, paginatedCriteria.PageSize);
-        //}
-
-        /// <summary>
         /// Creates an <see cref="IPaginated{T}" /> instance from the specified query.
         /// </summary>
         /// <typeparam name="T"></typeparam>

@@ -54,6 +54,6 @@ namespace Alamut.Data.Paging
         /// <summary>
         /// Gets the total rows count.
         /// </summary>
-        int TotalRowsCount { get; }
+        long TotalRowsCount { get; }
     }
 }

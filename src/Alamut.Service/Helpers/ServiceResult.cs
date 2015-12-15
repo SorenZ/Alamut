@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Alamut.Service.Api;
 
 namespace Alamut.Service.Helpers
 {
