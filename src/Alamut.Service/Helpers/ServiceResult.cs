@@ -11,7 +11,7 @@ namespace Alamut.Service.Helpers
     /// </summary>
     /// <remarks>result for void Service</remarks>
     [DataContract]
-    public class ServiceResult : IResponse
+    public class ServiceResult 
     {
         [DataMember(Name = "status")]
         public ResultStatus Status { get; set; } 

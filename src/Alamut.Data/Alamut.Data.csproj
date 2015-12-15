@@ -41,7 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\IActivateEntity.cs" />
+    <Compile Include="Entity\ICodeEntity.cs" />
+    <Compile Include="Entity\IDateEntity.cs" />
+    <Compile Include="Entity\IDeletableEntity.cs" />
     <Compile Include="Entity\IEntity.cs" />
+    <Compile Include="Entity\IMultiLanguageEnity.cs" />
+    <Compile Include="Entity\IMultiProjectEntity.cs" />
+    <Compile Include="Entity\IOrderedEntity.cs" />
+    <Compile Include="Entity\IPublishableEntity.cs" />
+    <Compile Include="Entity\IUserEntity.cs" />
     <Compile Include="NoSql\DynamicPaginatedCriteria.cs" />
     <Compile Include="NoSql\DynammicCriteria.cs" />
     <Compile Include="NoSql\IRepository.cs" />
