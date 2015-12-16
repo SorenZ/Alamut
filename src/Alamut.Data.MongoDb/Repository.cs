@@ -18,6 +18,7 @@ namespace Alamut.Data.MongoDb
 
         public void Create(TDocument entity)
         {
+            
             Collection.InsertOne(entity);
         }
 

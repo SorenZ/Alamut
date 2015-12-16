@@ -17,7 +17,7 @@ namespace Tester
     {
         static void Main(string[] args)
         {
-            AutoMapper.MapId<Product>();
+            MongoMapper.MapId<Product>();
 
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("test");
@@ -28,7 +28,7 @@ namespace Tester
 
             var product = new Product
             {
-                Name = "product 2"
+                Name = "product 6"
             };
 
             repo.Create(product);

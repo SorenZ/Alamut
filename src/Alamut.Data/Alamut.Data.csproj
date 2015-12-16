@@ -61,6 +61,10 @@
     <Compile Include="Paging\Paginated.cs" />
     <Compile Include="Paging\PaginatedCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structure\IdKey.cs" />
+    <Compile Include="Structure\IdTitle.cs" />
+    <Compile Include="Structure\IdValue.cs" />
+    <Compile Include="Structure\IIdBased.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Linq\" />

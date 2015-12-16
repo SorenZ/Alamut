@@ -1,4 +1,6 @@
-﻿namespace Alamut.Data.Entity
+﻿using Alamut.Data.Structure;
+
+namespace Alamut.Data.Entity
 {
 
     /// <summary>
@@ -7,7 +9,7 @@
     /// Id is mandetory
     /// the type of Id is string
     /// </summary>
-    public interface IEntity : IEntity<string>
+    public interface IEntity : IIdBased //, IEntity<string>
     { }
 
     /// <summary>
