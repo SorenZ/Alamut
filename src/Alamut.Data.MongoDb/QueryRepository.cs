@@ -61,7 +61,7 @@ namespace Alamut.Data.MongoDb
 
             return isDeleted == null
                 ? Collection.Find(new BsonDocument()).ToList()
-                : Collection.Find(new BsonDocument("IsDeleted", isDeleted.Value)).ToList();
+                : Collection.Find(new BsonDocument(EntitySsot.IsDeleted, isDeleted.Value)).ToList();
         }
 
         public List<TDocument> GetMany(Expression<Func<TDocument, bool>> predicate)
@@ -82,7 +82,9 @@ namespace Alamut.Data.MongoDb
 
         public IEnumerable<object> GetMany(DynammicCriteria criteria)
         {
-            throw new NotImplementedException();
+            var filters = criteria.Filters.Select(q => new BsonDocument(q.Key, q.Value));
+
+            return null;
         }
 
         public IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria, bool? isDeleted = null)
@@ -92,7 +94,7 @@ namespace Alamut.Data.MongoDb
 
             var filter = isDeleted == null
                 ? new BsonDocument()
-                : new BsonDocument("IsDeleted", isDeleted.Value);
+                : new BsonDocument(EntitySsot.IsDeleted, isDeleted.Value);
 
             using (var cursor = Collection.Find(filter)
                 .Skip(criteria.StartIndex)

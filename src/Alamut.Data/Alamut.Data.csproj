@@ -51,6 +51,7 @@
     <Compile Include="Entity\IOrderedEntity.cs" />
     <Compile Include="Entity\IPublishableEntity.cs" />
     <Compile Include="Entity\IUserEntity.cs" />
+    <Compile Include="Entity\SSOT.cs" />
     <Compile Include="NoSql\DynamicPaginatedCriteria.cs" />
     <Compile Include="NoSql\DynammicCriteria.cs" />
     <Compile Include="NoSql\IQueryRepository.cs" />

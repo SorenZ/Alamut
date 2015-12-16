@@ -5,6 +5,13 @@ using Alamut.Data.Entity;
 
 namespace Alamut.Data.NoSql
 {
+    /// <summary>
+    /// represend complete repository methods to query and manipulate the database
+    /// </summary>
+    /// <typeparam name="TDocument"></typeparam>
+    /// <remarks>
+    /// it's recommended to use this repo in Service layer not UI
+    /// </remarks>
     public interface IRepository<TDocument> : IQueryRepository<TDocument> 
         where TDocument : IEntity
     {
@@ -53,6 +60,7 @@ namespace Alamut.Data.NoSql
         /// </summary>
         /// <param name="id"></param>
         /// <param name="fieldset"></param>
+        [Obsolete("it's not recomended")]
         void GenericUpdate(string id, Dictionary<string, dynamic> fieldset);
         
         /// <summary>
