@@ -54,14 +54,9 @@ namespace Alamut.Data.MongoDb
             throw new NotImplementedException();
         }
 
-        public List<TDocument> GetAll(bool? isDeleted = null)
+        public List<TDocument> GetAll()
         {
-            if (isDeleted == null && typeof(IDeletableEntity).IsAssignableFrom(typeof(TDocument)))
-                isDeleted = false;
-
-            return isDeleted == null
-                ? Collection.Find(new BsonDocument()).ToList()
-                : Collection.Find(new BsonDocument(EntitySsot.IsDeleted, isDeleted.Value)).ToList();
+            return Collection.Find(new BsonDocument()).ToList();
         }
 
         public List<TDocument> GetMany(Expression<Func<TDocument, bool>> predicate)
@@ -87,26 +82,18 @@ namespace Alamut.Data.MongoDb
             return null;
         }
 
-        public IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria, bool? isDeleted = null)
+        public IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria = null)
         {
-            if (isDeleted == null && typeof(IDeletableEntity).IsAssignableFrom(typeof(TDocument)))
-                isDeleted = false;
+            var internalCriteria = criteria ?? new PaginatedCriteria();
 
-            var filter = isDeleted == null
-                ? new BsonDocument()
-                : new BsonDocument(EntitySsot.IsDeleted, isDeleted.Value);
+            var query = Collection.Find(new BsonDocument())
+                .Skip(internalCriteria.StartIndex)
+                .Limit(internalCriteria.PageSize);
 
-            using (var cursor = Collection.Find(filter)
-                .Skip(criteria.StartIndex)
-                .Limit(criteria.PageSize)
-                .ToCursor())
-            {
-                return new Paginated<TDocument>(
-                    cursor.ToEnumerable(),
-                    Collection.Count(new BsonDocument()),
-                    criteria.CurrentPage,
-                    criteria.PageSize);
-            }
+            return new Paginated<TDocument>(query.ToEnumerable(),
+                query.Count(),
+                internalCriteria.CurrentPage,
+                internalCriteria.PageSize);
         }
 
         public IPaginated<object> GetPaginated(DynamicPaginatedCriteria criteria)

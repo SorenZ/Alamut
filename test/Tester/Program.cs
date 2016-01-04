@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Alamut.Data.Entity;
 using Alamut.Data.MongoDb;
 using Alamut.Data.MongoDb.Mapper;
+using Alamut.Data.Paging;
 using MongoDB.Driver;
 
 namespace Tester
@@ -13,27 +15,32 @@ namespace Tester
         public string Name { get; set; }
     }
 
+    public class Pages : IEntity,
+        IPublishableEntity
+    {
+        public string Id { get; set; }
+        public string Title { get; set; }
+        public string Basename { get; set; }
+        public string Body { get; set; }
+        public bool IsPublished { get; set; }
+
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-            MongoMapper.MapId<Product>();
+            MongoMapper.MapId<Pages>();
 
-            var client = new MongoClient("mongodb://localhost");
-            var database = client.GetDatabase("test");
+            var client = new MongoClient("mongodb://samserver");
+            var database = client.GetDatabase("Sam");
             
 
-            var repo = new Repository<Product>(database);
+            var repo = new Repository<Pages>(database);
 
+            var list = repo.GetPaginated(new PaginatedCriteria());
 
-            var product = new Product
-            {
-                Name = "product 6"
-            };
-
-            repo.Create(product);
-
-            Console.WriteLine(product.Id);
+            Console.WriteLine(list.Data.First().Basename);
 
 
 

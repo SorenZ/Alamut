@@ -65,12 +65,10 @@ namespace Alamut.Data.NoSql
         /// <summary>
         /// get all items 
         /// </summary>
-        /// <param name="isDeleted">
         /// could be true, false, null
         /// null -> not important 
-        /// </param>
         /// <returns></returns>
-        List<TDocument> GetAll(bool? isDeleted = null);
+        List<TDocument> GetAll();
 
 
         /// <summary>
@@ -108,9 +106,8 @@ namespace Alamut.Data.NoSql
         /// get items paginated by criteria
         /// </summary>
         /// <param name="criteria"></param>
-        /// <param name="isDeleted"></param>
         /// <returns></returns>
-        IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria, bool? isDeleted = null);
+        IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria = null);
 
         /// <summary>
         /// get items paginated and filterd and sorted by criteria(s)
