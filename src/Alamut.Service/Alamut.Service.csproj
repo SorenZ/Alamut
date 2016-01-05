@@ -41,12 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\IHeader.cs" />
-    <Compile Include="Api\IRequest.cs" />
-    <Compile Include="Api\IResponse.cs" />
     <Compile Include="Helpers\ExceptionExtension.cs" />
     <Compile Include="Helpers\ServiceResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alamut.Data\Alamut.Data.csproj">
+      <Project>{933AA288-AF2A-4FE2-A80A-C8C5B9806501}</Project>
+      <Name>Alamut.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
