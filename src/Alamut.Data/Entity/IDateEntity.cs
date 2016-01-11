@@ -4,7 +4,8 @@ namespace Alamut.Data.Entity
 {
     public interface IDateEntity
     {
-        DateTime CreateDate { get; set; } 
+        DateTime CreateDate { get; set; }
+        DateTime UpdateDate { get; set; }
     }
 
 
@@ -15,5 +16,6 @@ namespace Alamut.Data.Entity
     public class DateEntity : IDateEntity
     {
         public DateTime CreateDate { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }
