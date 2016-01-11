@@ -18,13 +18,15 @@ namespace Alamut.Data.MongoDb
 
         public void Create(TDocument entity)
         {
-            
             Collection.InsertOne(entity);
         }
 
         public void Update(TDocument entity)
         {
-            throw new NotImplementedException();
+            var filter = Builders<TDocument>.Filter
+                .Eq(m => m.Id, entity.Id);
+
+            Collection.ReplaceOne(filter, entity);
         }
 
         public void UpdateOne<TField>(string id, 
