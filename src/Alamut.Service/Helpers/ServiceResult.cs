@@ -21,7 +21,7 @@ namespace Alamut.Service.Helpers
         /// return a successful ServiceResult 
         /// </summary>
         /// <returns>successful ServiceResult</returns>
-        public static ServiceResult Okay(string message = null, int status = 200)
+        public static ServiceResult Okay(string message = "", int status = 200)
         {
             return new ServiceResult
             {
@@ -38,7 +38,7 @@ namespace Alamut.Service.Helpers
         /// <param name="message">error message</param>
         /// <param name="status">result status</param>
         /// <returns>Error ServiceResult</returns>
-        public static ServiceResult Error(string message = null, int status = 500)
+        public static ServiceResult Error(string message = "", int status = 500)
         {
             return new ServiceResult
             {
@@ -97,7 +97,7 @@ namespace Alamut.Service.Helpers
         /// <param name="message">the result message</param>
         /// <param name="status">the result status code </param>
         /// <returns>successful ServiceResult</returns>
-        public static ServiceResult<T> Okay(T data, string message = null, int status = 200)
+        public static ServiceResult<T> Okay(T data, string message = "", int status = 200)
         {
             return new ServiceResult<T>
             {
