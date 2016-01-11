@@ -9,38 +9,42 @@ namespace Alamut.Service.Helpers
     /// It can be used as web service result
     /// </summary>
     /// <remarks>result for void Service</remarks>
-    [DataContract]
     public class ServiceResult 
     {
-        [DataMember(Name = "status")]
-        public ResultStatus Status { get; set; } 
+        public int Status { get; set; } 
 
-        [DataMember(Name = "message")]
         public string Message { get; set; }
+
+        public bool Succeed { get; set; }
 
         /// <summary>
         /// return a successful ServiceResult 
         /// </summary>
         /// <returns>successful ServiceResult</returns>
-        public static ServiceResult Okay()
+        public static ServiceResult Okay(string message = null, int status = 200)
         {
             return new ServiceResult
             {
-                Status = ResultStatus.Okay
+                Succeed = true,
+                Message = message,
+                Status = status
             };
         }
+
 
         /// <summary>
         /// return a ServiceResult with error status and error message
         /// </summary>
         /// <param name="message">error message</param>
+        /// <param name="status">result status</param>
         /// <returns>Error ServiceResult</returns>
-        public static ServiceResult Error(string message)
+        public static ServiceResult Error(string message = null, int status = 500)
         {
             return new ServiceResult
             {
-                Status = ResultStatus.Error,
-                Message = message
+                Succeed = false,
+                Message = message,
+                Status = status
             };
         }
 
@@ -49,14 +53,15 @@ namespace Alamut.Service.Helpers
         /// most inmportant exception included in error message
         /// </summary>
         /// <param name="ex">the exception</param>
+        /// <param name="status">error code</param>
         /// <returns>Error ServiceResult</returns>
-        public static ServiceResult Exception(Exception ex)
+        public static ServiceResult Exception(Exception ex, int status = 500 )
         {
             return new ServiceResult
             {
-                Status = ResultStatus.Exception,
-                Message = ex.GetExceptionMessages()
-                //Message = ex.ToString()
+                Succeed = false,
+                Message = ex.GetExceptionMessages(),
+                Status = status
             };
         }
 
@@ -83,20 +88,23 @@ namespace Alamut.Service.Helpers
     /// <remarks>result for not void result</remarks>
     public class ServiceResult<T> : ServiceResult
     {
-        [DataMember(Name = "data")]
         public T Data { get; set; }
 
         /// <summary>
         /// returns a successful typed ServiceResult
         /// </summary>
         /// <param name="data">return data</param>
+        /// <param name="message">the result message</param>
+        /// <param name="status">the result status code </param>
         /// <returns>successful ServiceResult</returns>
-        public static ServiceResult<T> Okay(T data)
+        public static ServiceResult<T> Okay(T data, string message = null, int status = 200)
         {
             return new ServiceResult<T>
             {
-                Status = ResultStatus.Okay,
-                Data = data
+                Succeed = true,
+                Message = message,
+                Data = data,
+                Status = status
             };
         }
 
@@ -104,13 +112,15 @@ namespace Alamut.Service.Helpers
         /// returns a typed ServiceResult with an error
         /// </summary>
         /// <param name="message">error message</param>
+        /// <param name="status"></param>
         /// <returns>error ServiceResult</returns>
-        public new static ServiceResult<T> Error(string message)
+        public new static ServiceResult<T> Error(string message, int status = 200)
         {
             return new ServiceResult<T>
             {
-                Status = ResultStatus.Exception,
-                Message = message
+                Succeed = false,
+                Message = message,
+                Status = status
             };
         }
     }
