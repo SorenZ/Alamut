@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Alamut.Data.Entity;
-using Alamut.Data.NoSql;
 using Alamut.Data.Paging;
+using Alamut.Data.Repository;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -49,10 +49,10 @@ namespace Alamut.Data.MongoDb
                 .FirstOrDefault();
         }
 
-        public object Get(DynammicCriteria criteria)
-        {
-            throw new NotImplementedException();
-        }
+        //public object Get(DynammicCriteria criteria)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public List<TDocument> GetAll()
         {
@@ -75,12 +75,12 @@ namespace Alamut.Data.MongoDb
             return Collection.Find(predicate).Project(projection).ToList();
         }
 
-        public IEnumerable<object> GetMany(DynammicCriteria criteria)
-        {
-            var filters = criteria.Filters.Select(q => new BsonDocument(q.Key, q.Value));
+        //public IEnumerable<object> GetMany(DynammicCriteria criteria)
+        //{
+        //    var filters = criteria.Filters.Select(q => new BsonDocument(q.Key, q.Value));
 
-            return null;
-        }
+        //    return null;
+        //}
 
         public IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria = null)
         {
@@ -96,9 +96,9 @@ namespace Alamut.Data.MongoDb
                 internalCriteria.PageSize);
         }
 
-        public IPaginated<object> GetPaginated(DynamicPaginatedCriteria criteria)
-        {
-            throw new NotImplementedException();
-        }
+        //public IPaginated<object> GetPaginated(DynamicPaginatedCriteria criteria)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

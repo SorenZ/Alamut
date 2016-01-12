@@ -1,5 +1,6 @@
 ﻿using Alamut.Data.Entity;
-using Alamut.Data.NoSql;
+using Alamut.Data.Repository;
+using Alamut.Data.Service;
 
 namespace Alamut.Service
 {

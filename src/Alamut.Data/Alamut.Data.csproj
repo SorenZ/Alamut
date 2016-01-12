@@ -52,11 +52,12 @@
     <Compile Include="Entity\IPublishableEntity.cs" />
     <Compile Include="Entity\IUserEntity.cs" />
     <Compile Include="Entity\SSOT.cs" />
+    <Compile Include="Linq\QueryableExtensions.cs" />
     <Compile Include="NoSql\DynamicPaginatedCriteria.cs" />
     <Compile Include="NoSql\DynammicCriteria.cs" />
-    <Compile Include="NoSql\IQueryRepository.cs" />
-    <Compile Include="NoSql\IRepository.cs" />
-    <Compile Include="NoSql\IService.cs" />
+    <Compile Include="Repository\IQueryRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Service\IService.cs" />
     <Compile Include="Paging\IPaginatedCriteria.cs" />
     <Compile Include="Paging\IPaginated[T].cs" />
     <Compile Include="Paging\Paginated.cs" />
@@ -67,9 +68,7 @@
     <Compile Include="Structure\IdValue.cs" />
     <Compile Include="Structure\IIdBased.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Linq\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release xcopy /y /d "$(TargetPath)"   "$(SolutionDir)build\"</PostBuildEvent>

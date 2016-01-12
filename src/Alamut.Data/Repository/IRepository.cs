@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Alamut.Data.Entity;
 
-namespace Alamut.Data.NoSql
+namespace Alamut.Data.Repository
 {
     /// <summary>
     /// represend complete repository methods to query and manipulate the database

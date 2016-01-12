@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Alamut.Data.Entity;
+using Alamut.Data.NoSql;
 using Alamut.Data.Paging;
 
-namespace Alamut.Data.NoSql
+namespace Alamut.Data.Repository
 {
     /// <summary>
     /// represent readonly repository method to fetch data from database
@@ -60,7 +61,7 @@ namespace Alamut.Data.NoSql
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        object Get(DynammicCriteria criteria);
+        //object Get(DynammicCriteria criteria);
 
         /// <summary>
         /// get all items 
@@ -100,7 +101,7 @@ namespace Alamut.Data.NoSql
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        IEnumerable<object> GetMany(DynammicCriteria criteria);
+        //IEnumerable<object> GetMany(DynammicCriteria criteria);
 
         /// <summary>
         /// get items paginated by criteria
@@ -114,6 +115,6 @@ namespace Alamut.Data.NoSql
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        IPaginated<object> GetPaginated(DynamicPaginatedCriteria criteria);
+        //IPaginated<object> GetPaginated(DynamicPaginatedCriteria criteria);
     }
 }

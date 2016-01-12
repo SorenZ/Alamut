@@ -2,7 +2,7 @@
 using System.Linq;
 using Alamut.Data.Paging;
 
-namespace Alamut.Data.Sql.Helpers
+namespace Alamut.Data.Linq
 {
     public static class QueryableExtensions
     {

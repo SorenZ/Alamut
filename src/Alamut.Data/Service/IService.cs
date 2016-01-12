@@ -1,6 +1,7 @@
 ﻿using Alamut.Data.Entity;
+using Alamut.Data.Repository;
 
-namespace Alamut.Data.NoSql
+namespace Alamut.Data.Service
 {
     /// <summary>
     /// provide base service contract
