@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Alamut.Data.Entity;
-using Alamut.Data.NoSql;
 using Alamut.Data.Repository;
 using MongoDB.Bson;
 using MongoDB.Driver;

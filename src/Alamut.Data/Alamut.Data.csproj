@@ -55,6 +55,7 @@
     <Compile Include="Linq\QueryableExtensions.cs" />
     <Compile Include="NoSql\DynamicPaginatedCriteria.cs" />
     <Compile Include="NoSql\DynammicCriteria.cs" />
+    <Compile Include="Paging\IPaginated.cs" />
     <Compile Include="Repository\IQueryRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Service\IService.cs" />
