@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alamut.Service.Helpers
+namespace Alamut.Data.Structure
 {
     /// <summary>
     /// Represent Service result data structure
@@ -59,7 +59,7 @@ namespace Alamut.Service.Helpers
             return new ServiceResult
             {
                 Succeed = false,
-                Message = ex.GetExceptionMessages(),
+                Message = ex.GetBaseException().Message,
                 Status = status
             };
         }

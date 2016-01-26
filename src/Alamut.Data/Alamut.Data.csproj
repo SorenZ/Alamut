@@ -68,6 +68,7 @@
     <Compile Include="Structure\IdTitle.cs" />
     <Compile Include="Structure\IdValue.cs" />
     <Compile Include="Structure\IIdBased.cs" />
+    <Compile Include="Structure\ServiceResult.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

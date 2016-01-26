@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Alamut.Data.Entity;
 using Alamut.Data.Repository;
+using Alamut.Data.Structure;
 
 namespace Alamut.Data.Service
 {
@@ -17,8 +18,10 @@ namespace Alamut.Data.Service
         IQueryRepository<TDocument> ReadOnly { get; }
 
         /// <summary>
-        /// provide a Queryable access to the data provider
+        /// delete item by Id
         /// </summary>
-        IQueryable<TDocument> Query { get; }
+        /// <param name="id">entity or document Id</param>
+        /// <returns></returns>
+        ServiceResult Delete(string id);
     }
 }

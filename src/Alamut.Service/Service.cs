@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 using Alamut.Data.Service;
+using Alamut.Data.Structure;
 
 namespace Alamut.Service
 {
@@ -23,9 +25,18 @@ namespace Alamut.Service
             get { return this.Repository; }
         }
 
-        public IQueryable<TDocument> Query
+        public ServiceResult Delete(string id)
         {
-            get { return this.Repository.Queryable; }
+            try
+            {
+                this.Repository.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult.Exception(ex);
+            }
+
+            return ServiceResult.Okay("Item successfully deleted");
         }
     }
 }
