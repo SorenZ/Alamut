@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 using Alamut.Data.Service;
@@ -27,6 +26,9 @@ namespace Alamut.Service
 
         public ServiceResult Delete(string id)
         {
+            if (id == null)
+                return ServiceResult.Error("Id could not be null");
+
             try
             {
                 this.Repository.Delete(id);
