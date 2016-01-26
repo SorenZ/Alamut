@@ -1,4 +1,5 @@
-﻿using Alamut.Data.Entity;
+﻿using System.Linq;
+using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 using Alamut.Data.Service;
 
@@ -10,16 +11,21 @@ namespace Alamut.Service
     /// <typeparam name="TDocument"></typeparam>
     public class Service<TDocument> : IService<TDocument> where TDocument : IEntity
     {
-        private readonly IRepository<TDocument> _repository;
+        protected readonly IRepository<TDocument> Repository;
 
         public Service(IRepository<TDocument> repository)
         {
-            _repository = repository;
+            Repository = repository;
         }
 
         public IQueryRepository<TDocument> ReadOnly
         {
-            get { return this._repository; }
+            get { return this.Repository; }
+        }
+
+        public IQueryable<TDocument> Query
+        {
+            get { return this.Repository.Queryable; }
         }
     }
 }

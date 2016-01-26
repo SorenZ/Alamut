@@ -1,4 +1,5 @@
-﻿using Alamut.Data.Entity;
+﻿using System.Linq;
+using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 
 namespace Alamut.Data.Service
@@ -14,5 +15,10 @@ namespace Alamut.Data.Service
         /// access to data(readonly) from who that access to the service.
         /// </summary>
         IQueryRepository<TDocument> ReadOnly { get; }
+
+        /// <summary>
+        /// provide a Queryable access to the data provider
+        /// </summary>
+        IQueryable<TDocument> Query { get; }
     }
 }

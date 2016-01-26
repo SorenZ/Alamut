@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Alamut.Data.Entity;
 using Alamut.Data.Repository;
@@ -38,7 +39,9 @@ namespace Alamut.Data.MongoDb
             var update = Builders<TDocument>.Update
                 .Set(memberExpression, value);
 
-            Collection.UpdateOne(filter, update);
+            var result = Collection.UpdateOne(filter, update);
+
+            Debug.WriteLine(result);
         }
 
         public void UpdateOne<TFilter, TField>(Expression<Func<TDocument, bool>> predicate, 
