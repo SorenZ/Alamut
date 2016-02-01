@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Attribute\Helper.cs" />
     <Compile Include="Const\ConstantUtility.cs" />
+    <Compile Include="DateTime\PersianDateExtensions.cs" />
     <Compile Include="Enum\EnumExtensions.cs" />
     <Compile Include="Enum\StringExtensions.cs" />
     <Compile Include="Linq\EnumerableExtensions.cs" />
