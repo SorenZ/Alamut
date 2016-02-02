@@ -11,10 +11,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="PaginatedCriteria" /> class.
         /// </summary>
-        public PaginatedCriteria()
+        public PaginatedCriteria(int currentPage = 1, int pageSize = 10)
         {
-            this.PageSize = 10;
-            this.CurrentPage = 1;
+            this.CurrentPage = currentPage;
+            this.PageSize = pageSize;
         }
 
         /// <summary>

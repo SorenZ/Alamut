@@ -122,6 +122,23 @@ namespace Alamut.Data.Structure
                 Status = status
             };
         }
+
+        /// <summary>
+        /// return a ServiceResult from exception
+        /// most inmportant exception included in error message
+        /// </summary>
+        /// <param name="ex">the exception</param>
+        /// <param name="status">error code</param>
+        /// <returns>Error ServiceResult</returns>
+        public new static ServiceResult<T> Exception(Exception ex, int status = 500)
+        {
+            return new ServiceResult<T>
+            {
+                Succeed = false,
+                Message = ex.GetBaseException().Message,
+                Status = status
+            };
+        }
     }
 
     /// <summary>
