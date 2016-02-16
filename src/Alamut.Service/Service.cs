@@ -1,44 +1,36 @@
-﻿using System;
-using Alamut.Data.Entity;
+﻿using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 using Alamut.Data.Service;
-using Alamut.Data.Structure;
 
 namespace Alamut.Service
 {
     /// <summary>
     /// provice base service class 
+    /// with access to database as readonly repository
     /// </summary>
     /// <typeparam name="TDocument"></typeparam>
-    public class Service<TDocument> : IService<TDocument> where TDocument : IEntity
+    public class Service<TDocument> : IService<TDocument> 
+        where TDocument : IEntity
     {
-        protected readonly IRepository<TDocument> Repository;
+        /// <summary>
+        /// if consumer needs repository s/he must use CrudService
+        /// </summary>
+        internal readonly IRepository<TDocument> InternalRepository;
 
-        public Service(IRepository<TDocument> repository)
+        public IRepository<TDocument> BaseRepository
         {
-            Repository = repository;
+            get { return InternalRepository; }
         }
 
-        public IQueryRepository<TDocument> ReadOnly
+        public Service(IRepository<TDocument> internalRepository)
         {
-            get { return this.Repository; }
+            InternalRepository = internalRepository;
         }
 
-        public ServiceResult Delete(string id)
+        public virtual IQueryRepository<TDocument> ReadOnly
         {
-            if (id == null)
-                return ServiceResult.Error("Id could not be null");
-
-            try
-            {
-                this.Repository.Delete(id);
-            }
-            catch (Exception ex)
-            {
-                return ServiceResult.Exception(ex);
-            }
-
-            return ServiceResult.Okay("Item successfully deleted");
+            get { return this.InternalRepository; }
         }
+        
     }
 }

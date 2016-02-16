@@ -58,6 +58,7 @@
     <Compile Include="Paging\IPaginated.cs" />
     <Compile Include="Repository\IQueryRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Service\ICrudService.cs" />
     <Compile Include="Service\IService.cs" />
     <Compile Include="Paging\IPaginatedCriteria.cs" />
     <Compile Include="Paging\IPaginated[T].cs" />
