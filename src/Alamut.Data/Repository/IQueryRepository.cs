@@ -96,6 +96,17 @@ namespace Alamut.Data.Repository
         List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate,
             Expression<Func<TDocument, TResult>> projection);
 
+        /// <summary>
+        /// get selected item(by projecction) 
+        /// filterd by ids
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="ids"></param>
+        /// <param name="projection"></param>
+        /// <returns></returns>
+        List<TResult> GetMany<TResult>(IEnumerable<string> ids,
+            Expression<Func<TDocument, TResult>> projection);
+
 
         /// <summary>
         /// get items paginated by criteria

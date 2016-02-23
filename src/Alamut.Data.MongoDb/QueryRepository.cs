@@ -74,10 +74,20 @@ namespace Alamut.Data.MongoDb
         public List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate,
             Expression<Func<TDocument, TResult>> projection)
         {
-            return Collection.Find(predicate).Project(projection).ToList();
+            return Collection
+                .Find(predicate)
+                .Project(projection)
+                .ToList();
         }
 
-        
+        public List<TResult> GetMany<TResult>(IEnumerable<string> ids, Expression<Func<TDocument, TResult>> projection)
+        {
+            return Collection
+                .Find(q => ids.Contains(q.Id))
+                .Project(projection)
+                .ToList();
+        }
+
 
         public IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria = null)
         {
