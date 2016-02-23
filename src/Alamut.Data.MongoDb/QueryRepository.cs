@@ -49,14 +49,16 @@ namespace Alamut.Data.MongoDb
                 .FirstOrDefault();
         }
 
-        //public object Get(DynammicCriteria criteria)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public List<TDocument> GetAll()
         {
             return Collection.Find(new BsonDocument()).ToList();
+        }
+
+        public List<TResult> GetAll<TResult>(Expression<Func<TDocument, TResult>> projection)
+        {
+            return Collection.Find(new BsonDocument())
+                .Project(projection)
+                .ToList();
         }
 
         public List<TDocument> GetMany(Expression<Func<TDocument, bool>> predicate)
@@ -75,12 +77,7 @@ namespace Alamut.Data.MongoDb
             return Collection.Find(predicate).Project(projection).ToList();
         }
 
-        //public IEnumerable<object> GetMany(DynammicCriteria criteria)
-        //{
-        //    var filters = criteria.Filters.Select(q => new BsonDocument(q.Key, q.Value));
-
-        //    return null;
-        //}
+        
 
         public IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria = null)
         {
@@ -96,9 +93,5 @@ namespace Alamut.Data.MongoDb
                 internalCriteria.PageSize);
         }
 
-        //public IPaginated<object> GetPaginated(DynamicPaginatedCriteria criteria)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

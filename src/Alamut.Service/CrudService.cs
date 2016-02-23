@@ -3,6 +3,7 @@ using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 using Alamut.Data.Service;
 using Alamut.Data.Structure;
+using Alamut.Service.Helpers;
 using AutoMapper;
 
 namespace Alamut.Service
@@ -29,6 +30,9 @@ namespace Alamut.Service
         {
             var entity = Mapper.Map<TDocument>(model);
 
+            if (entity is IDateEntity)
+                (entity as IDateEntity).SetCreateDate();
+
             try
             {
                 this.Repository.Create(entity);
@@ -47,6 +51,9 @@ namespace Alamut.Service
 
             if (entity == null)
                 return ServiceResult.Error("There is no entity with Id : " + id, 404);
+
+            if(entity is IDateEntity)
+                (entity as IDateEntity).SetUpdateDate();
 
             try
             {

@@ -56,20 +56,20 @@ namespace Alamut.Data.Repository
             Expression<Func<TDocument, TResult>> projection);
 
         /// <summary>
-        /// get one item by filters
-        /// support by Id query
-        /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
-        //object Get(DynammicCriteria criteria);
-
-        /// <summary>
         /// get all items 
         /// </summary>
         /// could be true, false, null
         /// null -> not important 
         /// <returns></returns>
         List<TDocument> GetAll();
+
+        /// <summary>
+        /// get a list of projected item
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="projection"></param>
+        /// <returns></returns>
+        List<TResult> GetAll<TResult>(Expression<Func<TDocument, TResult>> projection);
 
 
         /// <summary>
@@ -96,12 +96,6 @@ namespace Alamut.Data.Repository
         List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate,
             Expression<Func<TDocument, TResult>> projection);
 
-        /// <summary>
-        /// get items (fields or all of them) by filters 
-        /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
-        //IEnumerable<object> GetMany(DynammicCriteria criteria);
 
         /// <summary>
         /// get items paginated by criteria
@@ -110,11 +104,5 @@ namespace Alamut.Data.Repository
         /// <returns></returns>
         IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria = null);
 
-        /// <summary>
-        /// get items paginated and filterd and sorted by criteria(s)
-        /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
-        //IPaginated<object> GetPaginated(DynamicPaginatedCriteria criteria);
     }
 }
