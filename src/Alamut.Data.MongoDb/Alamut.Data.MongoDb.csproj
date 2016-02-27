@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachedRepository.cs" />
     <Compile Include="Helpers\EntityExtensions.cs" />
     <Compile Include="Helpers\StructureExtensions.cs" />
     <Compile Include="Mapper\MongoMapper.cs" />
