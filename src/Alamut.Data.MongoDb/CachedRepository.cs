@@ -91,6 +91,11 @@ namespace Alamut.Data.MongoDb
             throw new NotImplementedException();
         }
 
+        public void AddRange(IEnumerable<TDocument> list)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(TDocument entity)
         {
             throw new NotImplementedException();

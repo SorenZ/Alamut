@@ -18,7 +18,7 @@ namespace Alamut.Data.Entity
     /// Id is mandetory
     /// the type of Id will define by type parameter
     /// </summary>
-    public interface IEntity<TKey>
+    public interface IEntity<TKey> 
     {
         TKey Id { get; set; }
     }

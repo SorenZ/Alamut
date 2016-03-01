@@ -20,7 +20,13 @@ namespace Alamut.Data.Repository
         /// </summary>
         /// <param name="entity"></param>
         void Create(TDocument entity);
-        
+
+        /// <summary>
+        /// add list of item into database
+        /// </summary>
+        /// <param name="list"></param>
+        void AddRange(IEnumerable<TDocument> list);
+
         /// <summary>
         /// update item total value
         /// </summary>

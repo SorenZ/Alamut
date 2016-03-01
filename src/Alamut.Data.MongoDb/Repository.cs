@@ -22,6 +22,11 @@ namespace Alamut.Data.MongoDb
             Collection.InsertOne(entity);
         }
 
+        public void AddRange(IEnumerable<TDocument> list)
+        {
+            Collection.InsertMany(list);
+        }
+
         public void Update(TDocument entity)
         {
             var filter = Builders<TDocument>.Filter
