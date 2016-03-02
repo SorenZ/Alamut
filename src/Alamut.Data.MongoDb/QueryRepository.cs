@@ -19,29 +19,29 @@ namespace Alamut.Data.MongoDb
             Collection = database.GetCollection<TDocument>(typeof (TDocument).Name);
         }
 
-        public IQueryable<TDocument> Queryable
+        public virtual IQueryable<TDocument> Queryable
         {
             get { return Collection.AsQueryable(); }
         }
 
-        public TDocument Get(string id)
+        public virtual TDocument Get(string id)
         {
             return Collection.Find(m => m.Id == id).FirstOrDefault();
         }
 
-        public TDocument Get(Expression<Func<TDocument, bool>> predicate)
+        public virtual TDocument Get(Expression<Func<TDocument, bool>> predicate)
         {
             return Collection.Find(predicate).FirstOrDefault();
         }
 
-        public TResult Get<TResult>(string id, Expression<Func<TDocument, TResult>> projection)
+        public virtual TResult Get<TResult>(string id, Expression<Func<TDocument, TResult>> projection)
         {
             return Collection.Find(m => m.Id == id)
                 .Project(projection)
                 .FirstOrDefault();
         }
 
-        public TResult Get<TResult>(Expression<Func<TDocument, bool>> predicate,
+        public virtual TResult Get<TResult>(Expression<Func<TDocument, bool>> predicate,
             Expression<Func<TDocument, TResult>> projection)
         {
             return Collection.Find(predicate)
@@ -49,29 +49,29 @@ namespace Alamut.Data.MongoDb
                 .FirstOrDefault();
         }
 
-        public List<TDocument> GetAll()
+        public virtual List<TDocument> GetAll()
         {
             return Collection.Find(new BsonDocument()).ToList();
         }
 
-        public List<TResult> GetAll<TResult>(Expression<Func<TDocument, TResult>> projection)
+        public virtual List<TResult> GetAll<TResult>(Expression<Func<TDocument, TResult>> projection)
         {
             return Collection.Find(new BsonDocument())
                 .Project(projection)
                 .ToList();
         }
 
-        public List<TDocument> GetMany(Expression<Func<TDocument, bool>> predicate)
+        public virtual List<TDocument> GetMany(Expression<Func<TDocument, bool>> predicate)
         {
             return Collection.Find(predicate).ToList();
         }
 
-        public List<TDocument> GetMany(IEnumerable<string> ids)
+        public virtual List<TDocument> GetMany(IEnumerable<string> ids)
         {
             return Collection.Find(q => ids.Contains(q.Id)).ToList();
         }
 
-        public List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate,
+        public virtual List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate,
             Expression<Func<TDocument, TResult>> projection)
         {
             return Collection
@@ -80,7 +80,7 @@ namespace Alamut.Data.MongoDb
                 .ToList();
         }
 
-        public List<TResult> GetMany<TResult>(IEnumerable<string> ids, Expression<Func<TDocument, TResult>> projection)
+        public virtual List<TResult> GetMany<TResult>(IEnumerable<string> ids, Expression<Func<TDocument, TResult>> projection)
         {
             return Collection
                 .Find(q => ids.Contains(q.Id))
@@ -89,7 +89,7 @@ namespace Alamut.Data.MongoDb
         }
 
 
-        public IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria = null)
+        public virtual IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria = null)
         {
             var internalCriteria = criteria ?? new PaginatedCriteria();
 
@@ -98,7 +98,7 @@ namespace Alamut.Data.MongoDb
                 .Limit(internalCriteria.PageSize);
 
             return new Paginated<TDocument>(query.ToEnumerable(),
-                query.Count(),
+                Collection.Find(new BsonDocument()).Count(),
                 internalCriteria.CurrentPage,
                 internalCriteria.PageSize);
         }

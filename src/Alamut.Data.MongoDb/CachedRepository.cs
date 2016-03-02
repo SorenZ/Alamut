@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Caching;
 using Alamut.Data.Entity;
 using Alamut.Data.Paging;
-using Alamut.Data.Repository;
 using MongoDB.Driver;
 
 namespace Alamut.Data.MongoDb
@@ -15,130 +13,162 @@ namespace Alamut.Data.MongoDb
     /// implement full-cahced repository
     /// </summary>
     /// <typeparam name="TDocument"></typeparam>
-    public class CachedRepository<TDocument> : IRepository<TDocument>
-        where TDocument : IEntity
+    public class CachedRepository<TDocument> : Repository<TDocument>
+       where TDocument : IEntity
     {
-        private readonly IList<TDocument> _internalSource;
-        private readonly IRepository<TDocument> _internalRepository;
-        
         public CachedRepository(IMongoDatabase database)
+            : base(database)
+        { }
+
+        // ReSharper disable once StaticMemberInGenericType
+        private static readonly ObjectCache Cache = MemoryCache.Default;
+
+        private List<TDocument> InternalSource
         {
-            this._internalSource = new List<TDocument>();
-            _internalRepository = new Repository<TDocument>(database);
+            get
+            {
+                if (Cache.Contains(typeof (TDocument).Name))
+                    return Cache.Get(typeof (TDocument).Name) as List<TDocument>;
+
+                var data = base.GetAll();
+                Cache.Add(typeof (TDocument).Name,
+                    data,
+                    new CacheItemPolicy
+                    {SlidingExpiration = TimeSpan.FromMinutes(30)});
+
+                return data;
+            }
         }
 
-        public IQueryable<TDocument> Queryable {
-            get { return _internalSource.AsQueryable(); } 
+        private static void RefreshCache()
+        {
+            Cache.Remove(typeof (TDocument).Name);
         }
 
-        public TDocument Get(string id)
-        {
-            return this._internalSource.FirstOrDefault(q => q.Id == id);
+        public override IQueryable<TDocument> Queryable {
+            get { return InternalSource.AsQueryable(); } 
         }
 
-        public TDocument Get(Expression<Func<TDocument, bool>> predicate)
+        public override TDocument Get(string id)
         {
-            throw new NotImplementedException();
+            return InternalSource.FirstOrDefault(q => q.Id == id);
         }
 
-        public TResult Get<TResult>(string id, Expression<Func<TDocument, TResult>> projection)
+        public override TDocument Get(Expression<Func<TDocument, bool>> predicate)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("use Queryable");
         }
 
-        public TResult Get<TResult>(Expression<Func<TDocument, bool>> predicate, Expression<Func<TDocument, TResult>> projection)
+        public override TResult Get<TResult>(string id, Expression<Func<TDocument, TResult>> projection)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("use Queryable");
         }
 
-        public List<TDocument> GetAll()
+        public override TResult Get<TResult>(Expression<Func<TDocument, bool>> predicate, Expression<Func<TDocument, TResult>> projection)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("use Queryable");
         }
 
-        public List<TResult> GetAll<TResult>(Expression<Func<TDocument, TResult>> projection)
+        public override List<TDocument> GetAll()
         {
-            throw new NotImplementedException();
+            return InternalSource;
         }
 
-        public List<TDocument> GetMany(Expression<Func<TDocument, bool>> predicate)
+        public override List<TResult> GetAll<TResult>(Expression<Func<TDocument, TResult>> projection)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("use Queryable");
         }
 
-        public List<TDocument> GetMany(IEnumerable<string> ids)
+        public override List<TDocument> GetMany(Expression<Func<TDocument, bool>> predicate)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("use Queryable");
         }
 
-        public List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate, Expression<Func<TDocument, TResult>> projection)
+        public override List<TDocument> GetMany(IEnumerable<string> ids)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("use Queryable");
         }
 
-        public List<TResult> GetMany<TResult>(IEnumerable<string> ids, Expression<Func<TDocument, TResult>> projection)
+        public override List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate, Expression<Func<TDocument, TResult>> projection)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("use Queryable");
         }
 
-        public IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria = null)
+        public override List<TResult> GetMany<TResult>(IEnumerable<string> ids, Expression<Func<TDocument, TResult>> projection)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("use Queryable");
         }
 
-        public void Create(TDocument entity)
+        public override IPaginated<TDocument> GetPaginated(PaginatedCriteria criteria = null)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("use Queryable");
         }
 
-        public void AddRange(IEnumerable<TDocument> list)
+        public override void Create(TDocument entity)
         {
-            throw new NotImplementedException();
+            base.Create(entity);
+            RefreshCache();
         }
 
-        public void Update(TDocument entity)
+        public override void AddRange(IEnumerable<TDocument> list)
         {
-            throw new NotImplementedException();
+            base.AddRange(list);
+            RefreshCache();
         }
 
-        public void UpdateOne<TField>(string id, Expression<Func<TDocument, TField>> memberExpression, TField value)
+        public override void Update(TDocument entity)
         {
-            throw new NotImplementedException();
+            base.Update(entity);
+            RefreshCache();
         }
 
-        public void UpdateOne<TFilter, TField>(Expression<Func<TDocument, bool>> filterExpression, Expression<Func<TDocument, TField>> memberExpression, TField value)
+        public override void UpdateOne<TField>(string id, Expression<Func<TDocument, TField>> memberExpression, TField value)
         {
-            throw new NotImplementedException();
+            base.UpdateOne(id, memberExpression, value);
+            RefreshCache();
         }
 
-        public void GenericUpdate(string id, Dictionary<string, dynamic> fieldset)
+        public override void UpdateOne<TFilter, TField>(Expression<Func<TDocument, bool>> filterExpression, Expression<Func<TDocument, TField>> memberExpression, TField value)
         {
-            throw new NotImplementedException();
+            base.UpdateOne<TFilter,TField>(filterExpression, memberExpression, value);
+            RefreshCache();
         }
 
-        public void AddToList<TValue>(string id, Expression<Func<TDocument, IEnumerable<TValue>>> memberExpression, TValue value)
+        public override void GenericUpdate(string id, Dictionary<string, dynamic> fieldset)
         {
-            throw new NotImplementedException();
+            base.GenericUpdate(id, fieldset);
+            RefreshCache();
         }
 
-        public void RemoveFromList<TValue>(string id, Expression<Func<TDocument, IEnumerable<TValue>>> memberExpression, TValue value)
+        public override void AddToList<TValue>(string id, Expression<Func<TDocument, IEnumerable<TValue>>> memberExpression, TValue value)
         {
-            throw new NotImplementedException();
+            base.AddToList(id, memberExpression, value);
+            RefreshCache();
         }
 
-        public void Delete(string id)
+        public override void RemoveFromList<TValue>(string id, Expression<Func<TDocument, IEnumerable<TValue>>> memberExpression, TValue value)
         {
-            throw new NotImplementedException();
+            base.RemoveFromList(id, memberExpression, value);
+            RefreshCache();
         }
 
-        public void DeleteMany(Expression<Func<TDocument, bool>> predicate)
+        public override void Delete(string id)
         {
-            throw new NotImplementedException();
+            base.Delete(id);
+            RefreshCache();
         }
 
-        public void SetDeleted(string id)
+        public override void DeleteMany(Expression<Func<TDocument, bool>> predicate)
         {
-            throw new NotImplementedException();
+            base.DeleteMany(predicate);
+            RefreshCache();
         }
+
+        public override void SetDeleted(string id)
+        {
+            base.SetDeleted(id);
+            RefreshCache();
+        }
+        
     }
 }

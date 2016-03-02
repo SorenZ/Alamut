@@ -16,18 +16,17 @@ namespace Alamut.Data.MongoDb
     {
         public Repository(IMongoDatabase database) : base(database)
         { }
-
-        public void Create(TDocument entity)
+        public virtual void Create(TDocument entity)
         {
             Collection.InsertOne(entity);
         }
 
-        public void AddRange(IEnumerable<TDocument> list)
+        public virtual void AddRange(IEnumerable<TDocument> list)
         {
             Collection.InsertMany(list);
         }
 
-        public void Update(TDocument entity)
+        public virtual void Update(TDocument entity)
         {
             var filter = Builders<TDocument>.Filter
                 .Eq(m => m.Id, entity.Id);
@@ -35,7 +34,7 @@ namespace Alamut.Data.MongoDb
             Collection.ReplaceOne(filter, entity);
         }
 
-        public void UpdateOne<TField>(string id, 
+        public virtual void UpdateOne<TField>(string id, 
             Expression<Func<TDocument, TField>> memberExpression, TField value)
         {
             var filter = Builders<TDocument>.Filter
@@ -49,7 +48,7 @@ namespace Alamut.Data.MongoDb
             Debug.WriteLine(result);
         }
 
-        public void UpdateOne<TFilter, TField>(Expression<Func<TDocument, bool>> predicate, 
+        public virtual void UpdateOne<TFilter, TField>(Expression<Func<TDocument, bool>> predicate, 
             Expression<Func<TDocument, TField>> memberExpression, TField value)
         {
             var update = Builders<TDocument>.Update
@@ -58,7 +57,7 @@ namespace Alamut.Data.MongoDb
             Collection.UpdateOne(predicate, update);
         }
 
-        public void GenericUpdate(string id, Dictionary<string, dynamic> fieldset)
+        public virtual void GenericUpdate(string id, Dictionary<string, dynamic> fieldset)
         {
             var filter = Builders<TDocument>.Filter
                 .Eq(m => m.Id, id);
@@ -76,7 +75,7 @@ namespace Alamut.Data.MongoDb
             Collection.UpdateOne(filter, Builders<TDocument>.Update.Combine(updateList));
         }
 
-        public void AddToList<TValue>(string id, 
+        public virtual void AddToList<TValue>(string id, 
             Expression<Func<TDocument, IEnumerable<TValue>>> memberExpression, TValue value)
         {
             var filter = Builders<TDocument>.Filter
@@ -88,7 +87,7 @@ namespace Alamut.Data.MongoDb
             Collection.UpdateOne(filter, update);
         }
 
-        public void RemoveFromList<TValue>(string id, 
+        public virtual void RemoveFromList<TValue>(string id, 
             Expression<Func<TDocument, IEnumerable<TValue>>> memberExpression, TValue value)
         {
             var filter = Builders<TDocument>.Filter
@@ -100,7 +99,7 @@ namespace Alamut.Data.MongoDb
             Collection.UpdateOne(filter, update);
         }
 
-        public void Delete(string id)
+        public virtual void Delete(string id)
         {
             var filter = Builders<TDocument>.Filter
                 .Eq(m => m.Id, id);
@@ -108,12 +107,12 @@ namespace Alamut.Data.MongoDb
             Collection.DeleteOne(filter);
         }
 
-        public void DeleteMany(Expression<Func<TDocument, bool>> predicate)
+        public virtual void DeleteMany(Expression<Func<TDocument, bool>> predicate)
         {
             Collection.DeleteMany(predicate);
         }
 
-        public void SetDeleted(string id)
+        public virtual void SetDeleted(string id)
         {
             Collection.UpdateOne(q => q.Id == id,
                 new BsonDocument("$set", new BsonDocument(EntitySsot.IsDeleted, true)));

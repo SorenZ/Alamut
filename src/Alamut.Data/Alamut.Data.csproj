@@ -71,7 +71,9 @@
     <Compile Include="Structure\IIdBased.cs" />
     <Compile Include="Structure\ServiceResult.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Caching\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release xcopy /y /d "$(TargetPath)"   "$(SolutionDir)build\"</PostBuildEvent>
