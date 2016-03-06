@@ -6,8 +6,15 @@ using MongoDB.Bson.Serialization.Serializers;
 
 namespace Alamut.Data.MongoDb.Mapper
 {
+    /// <summary>
+    /// provide general mongod db mapper
+    /// </summary>
     public static class MongoMapper
     {
+        /// <summary>
+        /// map Id (string) to ObjectId in database
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
         public static void MapId<TEntity>() where TEntity : IEntity
         {
             BsonClassMap.RegisterClassMap<TEntity>(cm =>

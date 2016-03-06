@@ -6,6 +6,7 @@ using Alamut.Data.Entity;
 using Alamut.Data.Paging;
 using Alamut.Data.Repository;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
 namespace Alamut.Data.MongoDb
@@ -13,10 +14,14 @@ namespace Alamut.Data.MongoDb
     public class QueryRepository<TDocument> : IQueryRepository<TDocument> where TDocument : IEntity
     {
         protected readonly IMongoCollection<TDocument> Collection;
+        // TODO : require test
+        private static readonly Lazy<string> CollectionName =
+            new Lazy<string>(_ => BsonClassMap.LookupClassMap(typeof (TDocument)).Discriminator);
 
         public QueryRepository(IMongoDatabase database)
         {
-            Collection = database.GetCollection<TDocument>(typeof (TDocument).Name);
+            //_collectionName = 
+            Collection = database.GetCollection<TDocument>(CollectionName.Value);
         }
 
         public virtual IQueryable<TDocument> Queryable

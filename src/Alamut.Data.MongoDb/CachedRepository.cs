@@ -11,6 +11,7 @@ namespace Alamut.Data.MongoDb
 {
     /// <summary>
     /// implement full-cahced repository
+    /// cache all document in database for 30 minutes (Sliding Expiration)
     /// </summary>
     /// <typeparam name="TDocument"></typeparam>
     public class CachedRepository<TDocument> : Repository<TDocument>
@@ -20,7 +21,7 @@ namespace Alamut.Data.MongoDb
             : base(database)
         { }
 
-        // ReSharper disable once StaticMemberInGenericType
+        // ReSharper disable StaticMemberInGenericType
         private static readonly ObjectCache Cache = MemoryCache.Default;
 
         private List<TDocument> InternalSource
