@@ -45,6 +45,7 @@
     <Compile Include="DateTime\PersianDateExtensions.cs" />
     <Compile Include="Enum\EnumExtensions.cs" />
     <Compile Include="Enum\StringExtensions.cs" />
+    <Compile Include="Html\HtmlExtensions.cs" />
     <Compile Include="Linq\EnumerableExtensions.cs" />
     <Compile Include="Linq\LambdaExpressions.cs" />
     <Compile Include="Linq\QueryExtensions.cs" />
