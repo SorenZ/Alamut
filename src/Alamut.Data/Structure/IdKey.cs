@@ -1,6 +1,6 @@
 ﻿namespace Alamut.Data.Structure
 {
-    public class IdKey
+    public class IdKey : IIdBased
     {
         public IdKey(string id)
         {
