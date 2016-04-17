@@ -12,7 +12,8 @@ namespace Alamut.Data.MongoDb.Mapper
     public static class MongoMapper
     {
         /// <summary>
-        /// map Id (string) to ObjectId in database
+        /// - map Id (string) to ObjectId in database
+        /// - Ignore Extra Elementes set true
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         public static void MapId<TEntity>() where TEntity : IEntity
@@ -24,6 +25,7 @@ namespace Alamut.Data.MongoDb.Mapper
                     .SetSerializer(new StringSerializer(BsonType.ObjectId))
                     .SetIdGenerator(StringObjectIdGenerator.Instance);
                 //cm.MapIdMember(c => c.Id).SetIdGenerator(StringObjectIdGenerator.Instance);
+                cm.SetIgnoreExtraElements(true);
             });
         }
     }
