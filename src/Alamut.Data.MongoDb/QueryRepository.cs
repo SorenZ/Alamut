@@ -14,14 +14,15 @@ namespace Alamut.Data.MongoDb
     public class QueryRepository<TDocument> : IQueryRepository<TDocument> where TDocument : IEntity
     {
         protected readonly IMongoCollection<TDocument> Collection;
+        
         // TODO : require test
-        private static readonly Lazy<string> CollectionName =
-            new Lazy<string>(_ => BsonClassMap.LookupClassMap(typeof (TDocument)).Discriminator);
+        //private static readonly Lazy<string> CollectionName =
+        //    new Lazy<string>(() => BsonClassMap.LookupClassMap(typeof (TDocument)).Discriminator);
 
         public QueryRepository(IMongoDatabase database)
         {
-            //_collectionName = 
-            Collection = database.GetCollection<TDocument>(CollectionName.Value);
+            //Collection = database.GetCollection<TDocument>(CollectionName.Value);
+            Collection = database.GetCollection<TDocument>(typeof(TDocument).Name);
         }
 
         public virtual IQueryable<TDocument> Queryable

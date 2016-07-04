@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Threading;
 using MongoDB.Bson;
 
 namespace Alamut.Security
@@ -13,9 +14,15 @@ namespace Alamut.Security
         /// generate base-36 key by Datetime Ticks (utc)
         /// </summary>
         /// <returns></returns>
-        public static string GenerateKeyByTick()
+        public static string GenerateByTick()
         {
             return Base36.Encode((ulong) DateTime.Now.Ticks);
+        }
+
+        public static string ByHashedTick()
+        {
+            Thread.Sleep(1);
+            return Base36.Encode(Math.Abs(DateTime.Now.Ticks.GetHashCode()));
         }
 
         /// <summary> 
@@ -47,14 +54,17 @@ namespace Alamut.Security
             return Base36.Encode(Math.Abs(ObjectId.GenerateNewId().GetHashCode()));
         }
 
+        
+
         public static string GenerateFromSamBegin()
         {
+            Thread.Sleep(1);    
             var samBegin = new DateTime(2015, 01, 01);
             var elapsedTicks = DateTime.Now.Ticks - samBegin.Ticks;
-
-            //return Base36.Encode(int.Parse(elapsedTicks.ToString(CultureInfo.InvariantCulture).Replace("0", "")));
-            return Base36.Encode(elapsedTicks.GetHashCode());
-
+            
+            //return Base36.Encode((ulong)Math.Abs(elapsedTicks));
+            return Base36.Encode(Math.Abs(elapsedTicks.GetHashCode()));
+                
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using Alamut.Data.Entity;
 using Alamut.Data.MongoDb;
 using Alamut.Data.MongoDb.Mapper;
 using Alamut.Data.Paging;
+using Alamut.Security;
 using MongoDB.Driver;
 
 namespace Tester
@@ -30,18 +32,26 @@ namespace Tester
     {
         static void Main(string[] args)
         {
-            MongoMapper.MapId<Pages>();
+            //MongoMapper.MapId<Pages>();
 
-            var client = new MongoClient("mongodb://samserver");
-            var database = client.GetDatabase("Sam");
+            //var client = new MongoClient("mongodb://samserver");
+            //var database = client.GetDatabase("Sam");
             
 
-            var repo = new Repository<Pages>(database);
+            //var repo = new Repository<Pages>(database);
 
-            var list = repo.GetPaginated(new PaginatedCriteria());
+            //var list = repo.GetPaginated(new PaginatedCriteria());
 
-            Console.WriteLine(list.Data.First().Basename);
+            //Console.WriteLine(list.Data.First().Basename);
 
+            //Console.WriteLine(Base36.Encode(ulong.Parse(DateTime.Now.ToString("yyMMddHHmmssfff"))));
+
+            for (int i = 0; i < 1000; i++)
+            {
+                //Console.WriteLine(UniqueKeyGenerator.GenerateFromSamBegin());
+                //Console.WriteLine(UniqueKeyGenerator.GenerateKeyByTick());
+                Console.WriteLine(UniqueKeyGenerator.ByHashedTick());
+            }
 
 
             Console.ReadLine();
