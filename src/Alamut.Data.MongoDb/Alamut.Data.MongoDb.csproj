@@ -42,6 +42,10 @@
       <HintPath>..\..\packages\MongoDB.Driver.Core.2.2.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Caching" />
@@ -52,8 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BsonSerializer\JObjectSerializer.cs" />
     <Compile Include="CachedRepository.cs" />
     <Compile Include="Helpers\EntityExtensions.cs" />
+    <Compile Include="Helpers\IdUtitlity.cs" />
     <Compile Include="Helpers\StructureExtensions.cs" />
     <Compile Include="Mapper\MongoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

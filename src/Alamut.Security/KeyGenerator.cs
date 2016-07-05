@@ -58,13 +58,23 @@ namespace Alamut.Security
 
         public static string GenerateFromSamBegin()
         {
-            Thread.Sleep(1);    
-            var samBegin = new DateTime(2015, 01, 01);
+            Thread.Sleep(1);
+            var samBegin = new DateTime(2015, 01, 01, 01, 01, 01);
             var elapsedTicks = DateTime.Now.Ticks - samBegin.Ticks;
             
             //return Base36.Encode((ulong)Math.Abs(elapsedTicks));
             return Base36.Encode(Math.Abs(elapsedTicks.GetHashCode()));
                 
+        }
+
+        public static string GenerateByTime(DateTime? baseDateTime = null)
+        {
+            Thread.Sleep(1);
+            var @base = ulong.Parse((baseDateTime ?? new DateTime(2016, 07, 05)) // the time I was create this function
+                .ToString("yyMMddHHmmssfff"));
+            var now = ulong.Parse(DateTime.Now.ToString("yyMMddHHmmssfff"));
+
+            return Base36.Encode(now - @base);
         }
     }
 }

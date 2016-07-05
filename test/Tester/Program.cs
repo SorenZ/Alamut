@@ -28,29 +28,39 @@ namespace Tester
 
     }
 
+
+    public class UniqueIdCollection : IEntity
+    {
+        public string Id { get; set; }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
             //MongoMapper.MapId<Pages>();
 
-            //var client = new MongoClient("mongodb://samserver");
-            //var database = client.GetDatabase("Sam");
-            
+            var client = new MongoClient("mongodb://samserver");
+            var database = client.GetDatabase("SamUniqueTest");
 
-            //var repo = new Repository<Pages>(database);
+
+            var repo = new Repository<UniqueIdCollection>(database);
 
             //var list = repo.GetPaginated(new PaginatedCriteria());
 
             //Console.WriteLine(list.Data.First().Basename);
 
+            
             //Console.WriteLine(Base36.Encode(ulong.Parse(DateTime.Now.ToString("yyMMddHHmmssfff"))));
 
-            for (int i = 0; i < 1000; i++)
+            for (var i = 0; i < 1000000000; i++)
             {
                 //Console.WriteLine(UniqueKeyGenerator.GenerateFromSamBegin());
                 //Console.WriteLine(UniqueKeyGenerator.GenerateKeyByTick());
-                Console.WriteLine(UniqueKeyGenerator.ByHashedTick());
+                //Console.WriteLine(UniqueKeyGenerator.ByHashedTick());
+              //Console.WriteLine(UniqueKeyGenerator.GenerateByTime());
+                repo.Create(new UniqueIdCollection {Id = UniqueKeyGenerator.GenerateByTime()});
+                
             }
 
 
