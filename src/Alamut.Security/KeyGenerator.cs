@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Threading;
 using MongoDB.Bson;
 
@@ -67,6 +66,12 @@ namespace Alamut.Security
                 
         }
 
+        /// <summary>
+        /// genereate by time 
+        /// the time elapsed from base time in miliseconds (fff)
+        /// </summary>
+        /// <param name="baseDateTime">the time when application released</param>
+        /// <returns></returns>
         public static string GenerateByTime(DateTime? baseDateTime = null)
         {
             Thread.Sleep(1);

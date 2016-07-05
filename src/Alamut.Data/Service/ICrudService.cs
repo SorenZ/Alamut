@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 using Alamut.Data.Structure;
@@ -37,5 +40,34 @@ namespace Alamut.Data.Service
         /// <param name="id">entity or document Id</param>
         /// <returns></returns>
         ServiceResult Delete(string id);
+
+        /// <summary>
+        /// get single result and map to demanded type
+        /// </summary>
+        /// <typeparam name="TResult">type of result</typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <remarks>TResult should already mapped to current Entity</remarks>
+        TResult Get<TResult>(string id);
+
+        /// <summary>
+        /// get list of entity and map to demanded type
+        /// by ids
+        /// </summary>
+        /// <typeparam name="TResult">type of result</typeparam>
+        /// <param name="ids">entity.id</param>
+        /// <returns></returns>
+        /// <remarks>TResult should already mapped to current Entity</remarks>
+        List<TResult> GetMany<TResult>(IEnumerable<string> ids);
+
+        /// <summary>
+        /// get list of entity and map to demanded type
+        /// by predicate
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        /// <remarks>TResult should already mapped to current Entity</remarks>
+        List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate);
     }
 }

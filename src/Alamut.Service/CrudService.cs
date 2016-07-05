@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 using Alamut.Data.Service;
 using Alamut.Data.Structure;
 using Alamut.Service.Helpers;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace Alamut.Service
 {
@@ -82,6 +86,30 @@ namespace Alamut.Service
             }
 
             return ServiceResult.Okay("Item successfully deleted");
+        }
+
+        public virtual TResult Get<TResult>(string id)
+        {
+            return this.Repository.Queryable
+                .Where(q => q.Id == id)
+                .ProjectTo<TResult>(this.Mapper.ConfigurationProvider)
+                .FirstOrDefault();
+        }
+
+        public List<TResult> GetMany<TResult>(IEnumerable<string> ids)
+        {
+            return this.Repository.Queryable
+                .Where(q => ids.Contains(q.Id))
+                .ProjectTo<TResult>(this.Mapper.ConfigurationProvider)
+                .ToList();
+        }
+
+        public List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate)
+        {
+            return this.Repository.Queryable
+                .Where(predicate)
+                .ProjectTo<TResult>(this.Mapper.ConfigurationProvider)
+                .ToList();
         }
     }
 }
