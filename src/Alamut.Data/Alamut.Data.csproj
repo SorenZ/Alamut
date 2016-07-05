@@ -67,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structure\IdKey.cs" />
     <Compile Include="Structure\IdTitle.cs" />
+    <Compile Include="Structure\IdTitleBasename.cs" />
     <Compile Include="Structure\IdTitleInternalCode.cs" />
     <Compile Include="Structure\IdTitlePublishedDate.cs" />
     <Compile Include="Structure\IdValue.cs" />
