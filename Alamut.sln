@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Data.MongoDb", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Data.Sql", "src\Alamut.Data.Sql\Alamut.Data.Sql.csproj", "{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{3B98C2D1-3279-439F-AC01-795360FBBA87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alamut.Total", "nuget\Alamut.Total\Alamut.Total.csproj", "{0451BAEF-DF2E-4B98-8644-94EE9415E389}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,10 @@ Global
 		{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0451BAEF-DF2E-4B98-8644-94EE9415E389}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,5 +91,6 @@ Global
 		{D6C290FA-218D-452E-B00B-87E0A7ADCD3E} = {CF332DE3-E9B9-4264-B081-5F75E781C6A4}
 		{79A74A81-E9EA-4131-B2BD-A03927E2C81D} = {679A2FF9-3689-4F81-8887-8841580BE521}
 		{079DBEBE-2D20-4A22-BE8D-A8C217F0AD28} = {679A2FF9-3689-4F81-8887-8841580BE521}
+		{0451BAEF-DF2E-4B98-8644-94EE9415E389} = {3B98C2D1-3279-439F-AC01-795360FBBA87}
 	EndGlobalSection
 EndGlobal

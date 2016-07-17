@@ -46,6 +46,7 @@ namespace Alamut.Data.MongoDb
             var result = Collection.UpdateOne(filter, update);
 
             Debug.WriteLine(result);
+
         }
 
         public virtual void UpdateOne<TFilter, TField>(Expression<Func<TDocument, bool>> predicate, 

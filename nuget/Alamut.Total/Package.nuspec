@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Alamut.Total</id>
+    <version>1.0.0</version>
+    <title>Alamut.Total</title>
+    <authors>Soren Z.Vand</authors>
+    <owners></owners>
+    <description>
+      Alamut Total Solution for managing data orianted systesm.
+    </description>
+    <releaseNotes>
+    </releaseNotes>
+    <summary>
+      Alamut Total Solution
+    </summary>
+    <language>en-US</language>
+    <projectUrl>https://nuget.org/packages/Alamut.Total</projectUrl>
+    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+    <copyright>Copyright  2016</copyright>
+    <dependencies>
+        <group targetFramework="net45">
+        </group>
+    </dependencies>
+    <references></references>
+    <tags></tags>
+  </metadata>
+  <files>
+    <file src="lib\" target="lib" />
+    <file src="tools\" target="tools" />
+    <file src="content\" target="content" />
+  </files>
+</package>
