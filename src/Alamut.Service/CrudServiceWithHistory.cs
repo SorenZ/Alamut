@@ -112,19 +112,19 @@ namespace Alamut.Service
             return _historyRepository.Pull(historyId);
         }
 
-        public List<BaseHistory> GetHistories<TModel>()
+        public List<BaseHistory> GetHistories<TModel>(string entityId)
         {
             var entityName = typeof (TDocument).Name;
             var modelName = typeof (TModel).Name;
 
-            return _historyRepository.GetMany(entityName, modelName);
+            return _historyRepository.GetMany(entityName, modelName, entityId);
         }
 
-        public List<BaseHistory> GetHistories()
+        public List<BaseHistory> GetHistories(string entityId)
         {
             var entityName = typeof(TDocument).Name;
 
-            return _historyRepository.GetMany(entityName);
+            return _historyRepository.GetMany(entityName, entityId);
         }
 
         

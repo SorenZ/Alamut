@@ -74,15 +74,19 @@ namespace Alamut.Data.Service
 
         /// <summary>
         /// get list of base History for current TDocument and TModel
+        /// by entity Id
         /// </summary>
+        /// <param name="entityId"></param>
         /// <typeparam name="TModel"></typeparam>
         /// <returns></returns>
-        List<BaseHistory> GetHistories<TModel>();
+        List<BaseHistory> GetHistories<TModel>(string entityId);
 
         /// <summary>
         /// get list of base History for current TDocument 
+        /// by entity Id
         /// </summary>
+        /// <param name="entityId"></param>
         /// <returns></returns>
-        List<BaseHistory> GetHistories();
+        List<BaseHistory> GetHistories(string entityId);
     }
 }

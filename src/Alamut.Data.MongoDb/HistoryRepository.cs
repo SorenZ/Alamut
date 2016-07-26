@@ -40,15 +40,18 @@ namespace Alamut.Data.MongoDb
                 .FirstOrDefault();
         }
 
-        public List<THistoryDocument> GetMany(string entityName, string modelName)
+        public List<THistoryDocument> GetMany(string entityName, string modelName, string entityId)
         {
-            return Collection.Find(q => q.EntityName == entityName && q.ModelName == modelName)
+            return Collection.Find(q => q.EntityName == entityName 
+                && q.ModelName == modelName
+                && q.EntityId == entityId)
                 .ToList();
         }
 
-        public List<THistoryDocument> GetMany(string entityName)
+        public List<THistoryDocument> GetMany(string entityName, string entityId)
         {
-            return Collection.Find(q => q.EntityName == entityName)
+            return Collection.Find(q => q.EntityName == entityName
+                && q.EntityId == entityId)
                 .ToList();
         }
     }

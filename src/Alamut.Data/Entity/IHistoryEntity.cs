@@ -8,7 +8,9 @@ namespace Alamut.Data.Entity
     public interface IHistoryEntity : 
         IEntity,
         IUserEntity
+        
     {
+        string UserIp { get; set; }
         DateTime CreateDate { get; set; }
         string Action { get; set; }
         string ActionDescription { get; set; }
@@ -25,6 +27,7 @@ namespace Alamut.Data.Entity
     {
         public string Id { get; set; }
         public string UserId { get; set; }
+        public string UserIp { get; set; }
         public DateTime CreateDate { get; set; }
         public string Action { get; set; }
         public string ActionDescription { get; set; }

@@ -27,10 +27,11 @@ namespace Alamut.Data.Repository
         /// </summary>
         /// <param name="entityName">the name of entity</param>
         /// <param name="modelName">the name of model</param>
+        /// <param name="entityId"></param>
         /// <returns></returns>
-        List<THistoryDocument> GetMany(string entityName, string modelName);
+        List<THistoryDocument> GetMany(string entityName, string modelName, string entityId);
 
-        List<THistoryDocument> GetMany(string entityName);
+        List<THistoryDocument> GetMany(string entityName, string entityId);
 
         
     }
