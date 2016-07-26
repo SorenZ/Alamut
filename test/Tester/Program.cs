@@ -1,11 +1,14 @@
 ﻿using System;
-using System.Linq;
-using System.Threading;
 using Alamut.Data.Entity;
 using Alamut.Data.MongoDb;
+using Alamut.Data.MongoDb.BsonSerializer;
 using Alamut.Data.MongoDb.Mapper;
-using Alamut.Data.Paging;
-using Alamut.Security;
+using Alamut.Service;
+using AutoMapper;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.IdGenerators;
+using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 
 namespace Tester
@@ -28,6 +31,18 @@ namespace Tester
 
     }
 
+    public class CreatePagesVm
+    {
+        public string Title { get; set; }
+        public string Basename { get; set; }
+    }
+
+    public class UpdatePagesVm
+    {
+        public string Title { get; set; }
+        public string Basename { get; set; }
+    }
+
 
     public class UniqueIdCollection : IEntity
     {
@@ -36,33 +51,49 @@ namespace Tester
 
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            //MongoMapper.MapId<Pages>();
+            MongoMapper.MapId<Pages>();
+            //MongoMapper.MapId<BaseHistory>();
+            BsonClassMap.RegisterClassMap<BaseHistory>(cm =>
+            {
+                cm.AutoMap();
+                cm.MapIdMember(c => c.Id)
+                    .SetSerializer(new StringSerializer(BsonType.ObjectId))
+                    .SetIdGenerator(StringObjectIdGenerator.Instance);
+                cm.MapProperty(m => m.ModelValue).SetSerializer(new JObjectSerializer());
+            });
 
-            var client = new MongoClient("mongodb://samserver");
-            var database = client.GetDatabase("SamUniqueTest");
+            var mapper = new MapperConfiguration(configuration =>
+            {
+                configuration.CreateMap<CreatePagesVm, Pages>();
+                configuration.CreateMap<UpdatePagesVm, Pages>();
+            })
+                .CreateMapper();
 
+            var client = new MongoClient("mongodb://localhost");
+            var database = client.GetDatabase("SAM");
 
-            var repo = new Repository<UniqueIdCollection>(database);
+            var repo = new Repository<Pages>(database);
+            var historyRepo = new HistoryRepository<BaseHistory>(database);
 
-            //var list = repo.GetPaginated(new PaginatedCriteria());
+            var service = new CrudServiceWithHistory<Pages, Repository<Pages>>(repo, mapper, historyRepo);
 
-            //Console.WriteLine(list.Data.First().Basename);
+            //var result = service.Create(new CreatePagesVm {Basename = "basename", Title = "creation"});
+            //service.Update(result.Data, new UpdatePagesVm { Basename = "new base", Title = "new title" });
+            //service.Delete(result.Data);
+
+            //var histories = service.GetHistories<UpdatePagesVm>();
+
+            //foreach (var baseHistory in histories)
+            //{   
+            //    Console.WriteLine(baseHistory.Action + " " + baseHistory.ModelName);
+            //}
+
+            var history = service.GetHistory("57970510486ff5154c2549ea");
+            Console.WriteLine(history.Title + " " + history.Basename);
 
             
-            //Console.WriteLine(Base36.Encode(ulong.Parse(DateTime.Now.ToString("yyMMddHHmmssfff"))));
-
-            for (var i = 0; i < 1000000000; i++)
-            {
-                //Console.WriteLine(UniqueKeyGenerator.GenerateFromSamBegin());
-                //Console.WriteLine(UniqueKeyGenerator.GenerateKeyByTick());
-                //Console.WriteLine(UniqueKeyGenerator.ByHashedTick());
-              //Console.WriteLine(UniqueKeyGenerator.GenerateByTime());
-                repo.Create(new UniqueIdCollection {Id = UniqueKeyGenerator.GenerateByTime()});
-                
-            }
-
 
             Console.ReadLine();
         }

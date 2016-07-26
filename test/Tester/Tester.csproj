@@ -77,6 +77,10 @@
       <Project>{e759f353-9aa0-43da-98ad-86c8ca7f5a0b}</Project>
       <Name>Alamut.Security</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\src\Alamut.Service\Alamut.Service.csproj">
+      <Project>{7ec10230-a7b4-4680-a03b-4d0c7216eb08}</Project>
+      <Name>Alamut.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

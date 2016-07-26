@@ -61,6 +61,7 @@
     <Compile Include="Helpers\EntityExtensions.cs" />
     <Compile Include="Helpers\IdUtitlity.cs" />
     <Compile Include="Helpers\StructureExtensions.cs" />
+    <Compile Include="HistoryRepository.cs" />
     <Compile Include="Mapper\MongoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryRepository.cs" />

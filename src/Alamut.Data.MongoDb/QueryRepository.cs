@@ -5,9 +5,7 @@ using System.Linq.Expressions;
 using Alamut.Data.Entity;
 using Alamut.Data.Paging;
 using Alamut.Data.Repository;
-using Alamut.Data.Structure;
 using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
 namespace Alamut.Data.MongoDb
