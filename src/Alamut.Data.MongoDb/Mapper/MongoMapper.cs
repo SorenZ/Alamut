@@ -1,4 +1,7 @@
-﻿using Alamut.Data.Entity;
+﻿using System;
+using System.Linq.Expressions;
+using Alamut.Data.Entity;
+using Alamut.Data.MongoDb.BsonSerializer;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
@@ -26,6 +29,18 @@ namespace Alamut.Data.MongoDb.Mapper
                     .SetIdGenerator(StringObjectIdGenerator.Instance);
                 //cm.MapIdMember(c => c.Id).SetIdGenerator(StringObjectIdGenerator.Instance);
                 cm.SetIgnoreExtraElements(true);
+            });
+        }
+
+        public static void MapIdAndDynamicField<TEntity>(Expression<Func<TEntity, dynamic>> propertyLambda) where TEntity : IEntity
+        {
+            BsonClassMap.RegisterClassMap<TEntity>(cm =>
+            {
+                cm.AutoMap();
+                cm.MapIdMember(c => c.Id)
+                    .SetSerializer(new StringSerializer(BsonType.ObjectId))
+                    .SetIdGenerator(StringObjectIdGenerator.Instance);
+                cm.MapProperty(propertyLambda).SetSerializer(new JObjectSerializer());
             });
         }
     }
