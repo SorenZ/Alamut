@@ -2,12 +2,13 @@
 <package >
   <metadata>
     <id>Alamut.Total</id>
-    <version>1.0.0</version>
+    <version>1.1.1</version>
     <title>Alamut.Total</title>
     <authors>Soren Z.Vand</authors>
     <owners></owners>
     <description>
       Alamut Total Solution for managing data orianted systesm.
+      - include History in version 1.1.0
     </description>
     <releaseNotes>
     </releaseNotes>

@@ -8,7 +8,8 @@ using AutoMapper;
 
 namespace Alamut.Service
 {
-    public class CrudServiceWithHistory<TDocument, TRepository> : CrudService<TDocument, TRepository>
+    public class CrudServiceWithHistory<TDocument, TRepository> : CrudService<TDocument, TRepository>, 
+        ICrudServiceWithHistory<TDocument> 
         where TDocument : IEntity
         where TRepository : class, IRepository<TDocument>
     {
@@ -101,12 +102,12 @@ namespace Alamut.Service
 
         }
 
-        public TModel GetHistory<TModel>(string historyId) where TModel : class
+        public TModel GetHistoryValue<TModel>(string historyId) where TModel : class
         {
             return _historyRepository.Pull<TModel>(historyId);
         }
 
-        public dynamic GetHistory(string historyId)
+        public dynamic GetHistoryValue(string historyId)
         {
             return _historyRepository.Pull(historyId);
         }

@@ -90,7 +90,7 @@ namespace Tester
             //    Console.WriteLine(baseHistory.Action + " " + baseHistory.ModelName);
             //}
 
-            var history = service.GetHistory("57970510486ff5154c2549ea");
+            var history = service.GetHistoryValue("57970510486ff5154c2549ea");
             Console.WriteLine(history.Title + " " + history.Basename);
 
             
