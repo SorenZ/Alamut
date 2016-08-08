@@ -12,22 +12,22 @@ namespace Alamut.Service
     public class Service<TDocument> : IService<TDocument> 
         where TDocument : IEntity
     {
-        /// <summary>
-        /// if consumer needs repository s/he must use CrudService
-        /// </summary>
-        internal readonly IRepository<TDocument> InternalRepository;
-
-        public IRepository<TDocument> BaseRepository
-        {
-            get { return InternalRepository; }
-        }
-
         public Service(IRepository<TDocument> internalRepository)
         {
             InternalRepository = internalRepository;
         }
 
-        public virtual IQueryRepository<TDocument> ReadOnly
+        /// <summary>
+        /// if consumer needs repository s/he must use CrudService
+        /// </summary>
+        internal readonly IRepository<TDocument> InternalRepository;
+
+        protected IRepository<TDocument> BaseRepository
+        {
+            get { return InternalRepository; }
+        }
+
+        public IQueryRepository<TDocument> ReadOnly
         {
             get { return this.InternalRepository; }
         }

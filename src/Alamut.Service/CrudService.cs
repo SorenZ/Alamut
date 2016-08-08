@@ -37,6 +37,9 @@ namespace Alamut.Service
             if (entity is IDateEntity)
                 (entity as IDateEntity).SetCreateDate();
 
+            //if(entity is ICodeEntity)
+            //    (entity as ICodeEntity).Code = UniqueKey
+
             try
             {
                 this.Repository.Create(entity);

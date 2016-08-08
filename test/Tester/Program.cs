@@ -77,7 +77,7 @@ namespace Tester
             var repo = new Repository<Pages>(database);
             var historyRepo = new HistoryRepository<BaseHistory>(database);
 
-            var service = new CrudServiceWithHistory<Pages, Repository<Pages>>(repo, mapper, historyRepo);
+            var service = new HistoryService<Pages, Repository<Pages>>(repo, mapper, historyRepo);
 
             //var result = service.Create(new CreatePagesVm {Basename = "basename", Title = "creation"});
             //service.Update(result.Data, new UpdatePagesVm { Basename = "new base", Title = "new title" });

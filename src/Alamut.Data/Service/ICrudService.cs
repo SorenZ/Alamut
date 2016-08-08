@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Alamut.Data.Entity;
-using Alamut.Data.Repository;
 using Alamut.Data.Structure;
 
 namespace Alamut.Data.Service

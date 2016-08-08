@@ -8,14 +8,14 @@ using AutoMapper;
 
 namespace Alamut.Service
 {
-    public class CrudServiceWithHistory<TDocument, TRepository> : CrudService<TDocument, TRepository>, 
-        ICrudServiceWithHistory<TDocument> 
+    public class HistoryService<TDocument, TRepository> : CrudService<TDocument, TRepository>, 
+        IHistoryService<TDocument> 
         where TDocument : IEntity
         where TRepository : class, IRepository<TDocument>
     {
         private readonly IHistoryRepository<BaseHistory> _historyRepository;
 
-        public CrudServiceWithHistory(TRepository repository, IMapper mapper, IHistoryRepository<BaseHistory> historyRepository) 
+        public HistoryService(TRepository repository, IMapper mapper, IHistoryRepository<BaseHistory> historyRepository) 
             : base(repository, mapper)
         {
             _historyRepository = historyRepository;
@@ -23,7 +23,7 @@ namespace Alamut.Service
 
         public virtual ServiceResult<string> Create<TModel>(TModel model, 
             string userId = null, 
-            string actionDescription = "entity creation")
+            string actionDescription = null)
         {
            var result =  base.Create(model);
 
@@ -33,7 +33,6 @@ namespace Alamut.Service
                 {
                     Action = HistoryActions.Create,
                     UserId = userId,
-                    ActionDescription = actionDescription,
                     CreateDate = DateTime.Now,
                     EntityId = result.Data,
                     EntityName = typeof (TDocument).Name,
@@ -48,8 +47,8 @@ namespace Alamut.Service
         }
 
         public virtual ServiceResult Update<TModel>(string id, TModel model,
-            string userId = null, 
-            string actionDescription = "entity updated")
+            string userId = null,
+            string actionDescription = null)
         {
             var result = base.Update(id, model);
 
@@ -59,7 +58,6 @@ namespace Alamut.Service
                 {
                     Action = HistoryActions.Update,
                     UserId = userId,
-                    ActionDescription = actionDescription,
                     CreateDate = DateTime.Now,
                     EntityId = id,
                     EntityName = typeof(TDocument).Name,
@@ -74,8 +72,8 @@ namespace Alamut.Service
         }
 
         public virtual ServiceResult Delete(string id,
-            string userId = null, 
-            string actionDescription = "entity deleted")
+            string userId = null,
+            string actionDescription = null)
         {
             var entity = base.ReadOnly.Get(id);
 
@@ -87,7 +85,6 @@ namespace Alamut.Service
                 {
                     Action = HistoryActions.Delete,
                     UserId = userId,
-                    ActionDescription = actionDescription,
                     CreateDate = DateTime.Now,
                     EntityId = id,
                     EntityName = typeof(TDocument).Name,
@@ -126,7 +123,5 @@ namespace Alamut.Service
 
             return _historyRepository.GetMany(entityName, entityId);
         }
-
-        
     }
 }

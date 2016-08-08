@@ -13,7 +13,7 @@ namespace Alamut.Data.Entity
         string UserIp { get; set; }
         DateTime CreateDate { get; set; }
         string Action { get; set; }
-        string ActionDescription { get; set; }
+        //string ActionDescription { get; set; }
         string EntityId { get; set; }
         string EntityName { get; set; }
         string ModelName { get; set; }
@@ -30,7 +30,6 @@ namespace Alamut.Data.Entity
         public string UserIp { get; set; }
         public DateTime CreateDate { get; set; }
         public string Action { get; set; }
-        public string ActionDescription { get; set; }
         public string EntityId { get; set; }
         public string EntityName { get; set; }
         public string ModelName { get; set; }

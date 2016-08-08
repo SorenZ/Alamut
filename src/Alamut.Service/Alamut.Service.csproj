@@ -46,9 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrudService.cs" />
+    <Compile Include="FullService.cs" />
     <Compile Include="Helpers\EntityExtensions.cs" />
     <Compile Include="Helpers\ExceptionExtension.cs" />
-    <Compile Include="CrudServiceWithHistory.cs" />
+    <Compile Include="HistoryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service.cs" />
   </ItemGroup>

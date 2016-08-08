@@ -8,10 +8,9 @@ namespace Alamut.Data.Service
     /// provide a service that include history on history base in all commmand methods
     /// </summary>
     /// <typeparam name="TDocument"></typeparam>
-    public interface ICrudServiceWithHistory<TDocument> : ICrudService<TDocument>
+    public interface IHistoryService<TDocument> : ICrudService<TDocument> 
         where TDocument : IEntity
     {
-     
         /// <summary>
         /// create an item by mapping model into entity and 
         /// add it in database.
@@ -20,13 +19,11 @@ namespace Alamut.Data.Service
         /// <typeparam name="TModel"></typeparam>
         /// <param name="model"></param>
         /// <param name="userId"></param>
-        /// <param name="actionDescription"></param>
+        /// <param name="userIp"></param>
         /// <returns></returns>
-        ServiceResult<string> Create<TModel>(TModel model,
-            string userId = null,
-            string actionDescription = "entity creation");
+        ServiceResult<string> Create<TModel>(TModel model, string userId = null, string userIp = null);
 
-        
+
         /// <summary>
         /// update an item by id
         /// mapping model into entity (use new properties in model & old properties in entity)
@@ -37,11 +34,9 @@ namespace Alamut.Data.Service
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <param name="userId"></param>
-        /// <param name="actionDescription"></param>
+        /// <param name="userIp"></param>
         /// <returns></returns>
-        ServiceResult Update<TModel>(string id, TModel model,
-            string userId = null,
-            string actionDescription = "entity updated");
+        ServiceResult Update<TModel>(string id, TModel model, string userId = null, string userIp = null);
 
         /// <summary>
         /// delete item by Id
@@ -50,11 +45,9 @@ namespace Alamut.Data.Service
         /// </summary>
         /// <param name="id"></param>
         /// <param name="userId"></param>
-        /// <param name="actionDescription"></param>
+        /// <param name="userIp"></param>
         /// <returns></returns>
-        ServiceResult Delete(string id,
-            string userId = null,
-            string actionDescription = "entity deleted");
+        ServiceResult Delete(string id, string userId, string userIp);
 
         /// <summary>
         /// get typed history value by id

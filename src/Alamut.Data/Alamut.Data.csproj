@@ -47,6 +47,7 @@
     <Compile Include="Entity\IDeletableEntity.cs" />
     <Compile Include="Entity\IEntity.cs" />
     <Compile Include="Entity\IHistoryEntity.cs" />
+    <Compile Include="Entity\IIpEntity.cs" />
     <Compile Include="Entity\IMultiLanguageEnity.cs" />
     <Compile Include="Entity\IMultiProjectEntity.cs" />
     <Compile Include="Entity\IOrderedEntity.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="Repository\IQueryRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Service\ICrudService.cs" />
-    <Compile Include="Service\ICrudServiceWithHistory.cs" />
+    <Compile Include="Service\IHistoryService.cs" />
     <Compile Include="Service\IService.cs" />
     <Compile Include="Paging\IPaginatedCriteria.cs" />
     <Compile Include="Paging\IPaginated[T].cs" />
