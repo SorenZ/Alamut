@@ -24,7 +24,7 @@ namespace Alamut.Service
 
         public FullService(IRepository<TDocument> repository,
             IMapper mapper,
-            IHistoryRepository historyRepository)
+            IHistoryRepository historyRepository = null)
         {
             _repository = repository;
             _mapper = mapper;
@@ -46,6 +46,11 @@ namespace Alamut.Service
         #endregion
 
         #region ICrudService
+
+        protected IMapper Mapper
+        {
+            get { return this._mapper; }
+        }
 
         ServiceResult<string> ICrudService<TDocument>.Create<TModel>(TModel model)
         {
@@ -85,7 +90,7 @@ namespace Alamut.Service
             }
             catch (Exception ex)
             {
-                return ServiceResult<string>.Exception(ex);
+                return ServiceResult.Exception(ex);
             }
 
             return ServiceResult.Okay();
@@ -132,18 +137,16 @@ namespace Alamut.Service
                 .ToList();
         }
 
-
-
         #endregion
 
         #region IHistoryService
 
-        ServiceResult<string> IHistoryService<TDocument>.Create<TModel>(TModel model, string userId = null, string userIp = null)
+        public ServiceResult<string> Create<TModel>(TModel model, string userId = null, string userIp = null)
         {
-
             var result = (this as ICrudService<TDocument>).Create(model);
 
             if (!result.Succeed) return result;
+            if (_historyRepository == null) return result;
 
             var history = new BaseHistory
             {
@@ -162,11 +165,12 @@ namespace Alamut.Service
             return result;
         }
 
-        ServiceResult IHistoryService<TDocument>.Update<TModel>(string id, TModel model, string userId = null, string userIp = null)
+        public ServiceResult Update<TModel>(string id, TModel model, string userId = null, string userIp = null)
         {
             var result = (this as ICrudService<TDocument>).Update(id, model);
 
             if (!result.Succeed) return result;
+            if (_historyRepository == null) return result;
 
             var history = new BaseHistory
             {
@@ -185,13 +189,14 @@ namespace Alamut.Service
             return result;
         }
 
-        ServiceResult IHistoryService<TDocument>.Delete(string id, string userId, string userIp)
+        public ServiceResult Delete(string id, string userId, string userIp)
         {
             var entity = this.ReadOnly.Get(id);
 
             var result = (this as ICrudService<TDocument>).Delete(id);
 
             if (!result.Succeed) return result;
+            if (_historyRepository == null) return result;
 
             var history = new BaseHistory
             {
@@ -211,26 +216,34 @@ namespace Alamut.Service
 
         }
 
-        TModel IHistoryService<TDocument>.GetHistoryValue<TModel>(string historyId)
+        public TModel GetHistoryValue<TModel>(string historyId) where TModel : class
         {
+            if (_historyRepository == null) throw new Exception("IHistoryRepository not provided.");
+
             return _historyRepository.Pull<TModel>(historyId);
         }
 
-        dynamic IHistoryService<TDocument>.GetHistoryValue(string historyId)
+        public dynamic GetHistoryValue(string historyId)
         {
+            if (_historyRepository == null) throw new Exception("IHistoryRepository not provided.");
+
             return _historyRepository.Pull(historyId);
         }
 
-        List<BaseHistory> IHistoryService<TDocument>.GetHistories<TModel>(string entityId)
+        public List<BaseHistory> GetHistories<TModel>(string entityId)
         {
+            if (_historyRepository == null) throw new Exception("IHistoryRepository not provided.");
+
             var entityName = typeof (TDocument).Name;
             var modelName = typeof (TModel).Name;
 
             return _historyRepository.GetMany(entityName, modelName, entityId);
         }
 
-        List<BaseHistory> IHistoryService<TDocument>.GetHistories(string entityId)
+        public List<BaseHistory> GetHistories(string entityId)
         {
+            if (_historyRepository == null) throw new Exception("IHistoryRepository not provided.");
+
             var entityName = typeof (TDocument).Name;
 
             return _historyRepository.GetMany(entityName, entityId);

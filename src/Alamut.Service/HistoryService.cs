@@ -8,6 +8,7 @@ using AutoMapper;
 
 namespace Alamut.Service
 {
+    [Obsolete("use full-service instead")]
     public class HistoryService<TDocument, TRepository> : CrudService<TDocument, TRepository>, 
         IHistoryService<TDocument> 
         where TDocument : IEntity

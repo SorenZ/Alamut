@@ -12,11 +12,19 @@ using AutoMapper.QueryableExtensions;
 
 namespace Alamut.Service
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TDocument"></typeparam>
+    /// <typeparam name="TRepository"></typeparam>
+    /// <remarks>good idea to use Full-Service instead</remarks>
     public class CrudService<TDocument, TRepository> : Service<TDocument>,
         ICrudService<TDocument>
         where TDocument : IEntity
         where TRepository : class, IRepository<TDocument>
     {
+
+        [Obsolete("It will remove in version 3-*, user explicit repository in your onwn service")]
         protected TRepository Repository
         {
             get { return InternalRepository as TRepository; }
