@@ -58,6 +58,10 @@
       <Project>{933AA288-AF2A-4FE2-A80A-C8C5B9806501}</Project>
       <Name>Alamut.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alamut.Security\Alamut.Security.csproj">
+      <Project>{e759f353-9aa0-43da-98ad-86c8ca7f5a0b}</Project>
+      <Name>Alamut.Security</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

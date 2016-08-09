@@ -1,4 +1,5 @@
-﻿using Alamut.Data.Entity;
+﻿using System;
+using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 using Alamut.Data.Service;
 
@@ -12,15 +13,15 @@ namespace Alamut.Service
     public class Service<TDocument> : IService<TDocument> 
         where TDocument : IEntity
     {
-        public Service(IRepository<TDocument> internalRepository)
+        public Service(IRepository<TDocument> repository)
         {
-            InternalRepository = internalRepository;
+            InternalRepository = repository;
         }
 
         /// <summary>
         /// if consumer needs repository s/he must use CrudService
         /// </summary>
-        internal readonly IRepository<TDocument> InternalRepository;
+        internal readonly IRepository<TDocument> InternalRepository; // TODO : should be private
 
         protected IRepository<TDocument> BaseRepository
         {

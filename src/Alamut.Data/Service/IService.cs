@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Alamut.Data.Entity;
+﻿using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 
 namespace Alamut.Data.Service

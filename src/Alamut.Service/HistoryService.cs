@@ -8,93 +8,105 @@ using AutoMapper;
 
 namespace Alamut.Service
 {
-    [Obsolete("use full-service instead")]
-    public class HistoryService<TDocument, TRepository> : CrudService<TDocument, TRepository>, 
+    //[Obsolete("use full-service instead")]
+    public class HistoryService<TDocument> :
         IHistoryService<TDocument> 
         where TDocument : IEntity
-        where TRepository : class, IRepository<TDocument>
     {
-        private readonly IHistoryRepository<BaseHistory> _historyRepository;
+        private readonly ICrudService<TDocument> _crudService;
+        private readonly IHistoryRepository _historyRepository;
 
-        public HistoryService(TRepository repository, IMapper mapper, IHistoryRepository<BaseHistory> historyRepository) 
-            : base(repository, mapper)
+        public HistoryService(IHistoryRepository historyRepository,
+            ICrudService<TDocument> crudService)
         {
+            _crudService = crudService;
             _historyRepository = historyRepository;
         }
 
-        public virtual ServiceResult<string> Create<TModel>(TModel model, 
-            string userId = null, 
-            string actionDescription = null)
+        public HistoryService(IHistoryRepository historyRepository, 
+            IRepository<TDocument> repository = null,
+            IMapper mapper = null)
         {
-           var result =  base.Create(model);
+            _crudService = new CrudService<TDocument>(repository, mapper);
+            _historyRepository = historyRepository;
+        }
 
-            if (result.Succeed)
+        public ServiceResult<string> Create<TModel>(TModel model, 
+            string userId = null,
+            string userIp = null)
+        {
+            var result = _crudService.Create(model);
+
+            if (!result.Succeed) return result;
+            //if (_historyRepository == null) return result;
+
+            var history = new BaseHistory
             {
-                var history = new BaseHistory
-                {
-                    Action = HistoryActions.Create,
-                    UserId = userId,
-                    CreateDate = DateTime.Now,
-                    EntityId = result.Data,
-                    EntityName = typeof (TDocument).Name,
-                    ModelName = typeof (TModel).Name,
-                    ModelValue = model,
-                };
+                Action = HistoryActions.Create,
+                UserId = userId ?? ((model is IUserEntity) ? (model as IUserEntity).UserId : null),
+                CreateDate = DateTime.Now,
+                EntityId = result.Data,
+                EntityName = typeof(TDocument).Name,
+                ModelName = typeof(TModel).Name,
+                ModelValue = model,
+                UserIp = userIp ?? ((model is IIpEntity) ? (model as IIpEntity).IpAddress : null)
+            };
 
-                _historyRepository.Push(history);
-            }
+            _historyRepository.Push(history);
 
             return result;
         }
 
-        public virtual ServiceResult Update<TModel>(string id, TModel model,
+        public ServiceResult Update<TModel>(string id, TModel model,
             string userId = null,
-            string actionDescription = null)
+            string userIp = null)
         {
-            var result = base.Update(id, model);
+            var result = _crudService.Update(id, model);
 
-            if (result.Succeed)
+            if (!result.Succeed) return result;
+            //if (_historyRepository == null) return result;
+
+            var history = new BaseHistory
             {
-                var history = new BaseHistory
-                {
-                    Action = HistoryActions.Update,
-                    UserId = userId,
-                    CreateDate = DateTime.Now,
-                    EntityId = id,
-                    EntityName = typeof(TDocument).Name,
-                    ModelName = typeof(TModel).Name,
-                    ModelValue = model,
-                };
+                Action = HistoryActions.Update,
+                UserId = userId ?? ((model is IUserEntity) ? (model as IUserEntity).UserId : null),
+                CreateDate = DateTime.Now,
+                EntityId = id,
+                EntityName = typeof(TDocument).Name,
+                ModelName = typeof(TModel).Name,
+                ModelValue = model,
+                UserIp = userIp ?? ((model is IIpEntity) ? (model as IIpEntity).IpAddress : null)
+            };
 
-                _historyRepository.Push(history);
-            }
+            _historyRepository.Push(history);
 
             return result;
         }
 
         public virtual ServiceResult Delete(string id,
-            string userId = null,
-            string actionDescription = null)
+            string userId,
+            string userIp)
         {
-            var entity = base.ReadOnly.Get(id);
+            var entity = _crudService.ReadOnly.Get(id);
 
-            var result = base.Delete(id);
+            var result = _crudService.Delete(id);
 
-            if (result.Succeed)
+            if (!result.Succeed) return result;
+            if (_historyRepository == null) return result;
+
+            var history = new BaseHistory
             {
-                var history = new BaseHistory
-                {
-                    Action = HistoryActions.Delete,
-                    UserId = userId,
-                    CreateDate = DateTime.Now,
-                    EntityId = id,
-                    EntityName = typeof(TDocument).Name,
-                    ModelName = typeof(TDocument).Name,
-                    ModelValue = entity,
-                };
+                Action = HistoryActions.Delete,
+                UserId = userId,
+                CreateDate = DateTime.Now,
+                EntityId = id,
+                EntityName = typeof(TDocument).Name,
+                ModelName = typeof(TDocument).Name,
+                ModelValue = entity,
+                UserIp = userIp
+            };
 
-                _historyRepository.Push(history);
-            }
+            _historyRepository.Push(history);
 
             return result;
 

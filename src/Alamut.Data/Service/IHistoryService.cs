@@ -8,7 +8,7 @@ namespace Alamut.Data.Service
     /// provide a service that include history on history base in all commmand methods
     /// </summary>
     /// <typeparam name="TDocument"></typeparam>
-    public interface IHistoryService<TDocument> : ICrudService<TDocument> 
+    public interface IHistoryService<TDocument> //ICrudService<TDocument> 
         where TDocument : IEntity
     {
         /// <summary>

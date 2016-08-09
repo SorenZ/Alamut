@@ -6,18 +6,112 @@ using Alamut.Data.Entity;
 using Alamut.Data.Repository;
 using Alamut.Data.Service;
 using Alamut.Data.Structure;
+using Alamut.Security;
 using Alamut.Service.Helpers;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 
 namespace Alamut.Service
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="TDocument"></typeparam>
-    /// <typeparam name="TRepository"></typeparam>
-    /// <remarks>good idea to use Full-Service instead</remarks>
+    public class CrudService<TDocument> : Service<TDocument>,
+        ICrudService<TDocument>
+        where TDocument : IEntity
+    {
+        protected IMapper Mapper { get; private set; }
+
+        public CrudService(IRepository<TDocument> repository, IMapper mapper)
+            : base(repository)
+        {
+            Mapper = mapper;
+        }
+
+        public virtual ServiceResult<string> Create<TModel>(TModel model)
+        {
+            var entity = Mapper.Map<TDocument>(model);
+
+            if (entity is IDateEntity)
+                (entity as IDateEntity).SetCreateDate();
+
+            if (entity is ICodeEntity)
+                (entity as ICodeEntity).Code = UniqueKeyGenerator.GenerateByTime();
+
+            try
+            {
+                base.BaseRepository.Create(entity);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult<string>.Exception(ex);
+            }
+
+            return ServiceResult<string>.Okay(entity.Id);
+        }
+
+        public virtual ServiceResult Update<TModel>(string id, TModel model)
+        {
+            var entity = base.BaseRepository.Get(id);
+
+            if (entity == null)
+                return ServiceResult.Error("There is no entity with Id : " + id, 404);
+
+            if (entity is IDateEntity)
+                (entity as IDateEntity).SetUpdateDate();
+
+            try
+            {
+                base.BaseRepository.Update(Mapper.Map(model, entity));
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult<string>.Exception(ex);
+            }
+
+            return ServiceResult.Okay();
+        }
+
+        public virtual ServiceResult Delete(string id)
+        {
+            if (id == null)
+                return ServiceResult.Error("Id could not be null");
+
+            try
+            {
+                base.BaseRepository.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult.Exception(ex);
+            }
+
+            return ServiceResult.Okay("Item successfully deleted");
+        }
+
+        public virtual TResult Get<TResult>(string id)
+        {
+            return base.BaseRepository.Queryable
+                .Where(q => q.Id == id)
+                .ProjectTo<TResult>(this.Mapper.ConfigurationProvider)
+                .FirstOrDefault();
+        }
+
+        public List<TResult> GetMany<TResult>(IEnumerable<string> ids)
+        {
+            return base.BaseRepository.Queryable
+                .Where(q => ids.Contains(q.Id))
+                .ProjectTo<TResult>(this.Mapper.ConfigurationProvider)
+                .ToList();
+        }
+
+        public List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate)
+        {
+            return base.BaseRepository.Queryable
+                .Where(predicate)
+                .ProjectTo<TResult>(this.Mapper.ConfigurationProvider)
+                .ToList();
+        }
+    }
+
+    [Obsolete("It will remove in soon, Use CrudService<TDocument> or FullService instead.")]
     public class CrudService<TDocument, TRepository> : Service<TDocument>,
         ICrudService<TDocument>
         where TDocument : IEntity
@@ -45,8 +139,8 @@ namespace Alamut.Service
             if (entity is IDateEntity)
                 (entity as IDateEntity).SetCreateDate();
 
-            //if(entity is ICodeEntity)
-            //    (entity as ICodeEntity).Code = UniqueKey
+            if (entity is ICodeEntity)
+                (entity as ICodeEntity).Code = UniqueKeyGenerator.GenerateByTime();
 
             try
             {

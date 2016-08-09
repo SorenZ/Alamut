@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using MongoDB.Bson;
 
 namespace Alamut.Security
 {
@@ -48,10 +47,10 @@ namespace Alamut.Security
         /// generate base-36 key by MongoDb object Id
         /// </summary>
         /// <returns></returns>
-        public static string GenerateKeyByObjectId()
-        {
-            return Base36.Encode(Math.Abs(ObjectId.GenerateNewId().GetHashCode()));
-        }
+        //public static string GenerateKeyByObjectId()
+        //{
+        //    return Base36.Encode(Math.Abs(ObjectId.GenerateNewId().GetHashCode()));
+        //}
 
         
 
