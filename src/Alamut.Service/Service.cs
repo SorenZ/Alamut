@@ -23,7 +23,7 @@ namespace Alamut.Service
         /// </summary>
         internal readonly IRepository<TDocument> InternalRepository; // TODO : should be private
 
-        protected IRepository<TDocument> BaseRepository
+        protected IRepository<TDocument> Repository
         {
             get { return InternalRepository; }
         }

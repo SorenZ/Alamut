@@ -42,6 +42,7 @@ namespace Alamut.Data.MongoDb
 
             var update = Builders<TDocument>.Update
                 .Set(memberExpression, value);
+                
 
             var result = Collection.UpdateOne(filter, update);
 

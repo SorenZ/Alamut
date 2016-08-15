@@ -21,7 +21,7 @@ namespace Alamut.Data.Service
         /// <param name="userId"></param>
         /// <param name="userIp"></param>
         /// <returns></returns>
-        ServiceResult<string> Create<TModel>(TModel model, string userId = null, string userIp = null);
+        ServiceResult<string> Create<TModel>(TModel model, string userId, string userIp = null);
 
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Alamut.Data.Service
         /// <param name="userId"></param>
         /// <param name="userIp"></param>
         /// <returns></returns>
-        ServiceResult Update<TModel>(string id, TModel model, string userId = null, string userIp = null);
+        ServiceResult Update<TModel>(string id, TModel model, string userId, string userIp = null);
 
         /// <summary>
         /// delete item by Id

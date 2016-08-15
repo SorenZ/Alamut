@@ -32,7 +32,7 @@ namespace Alamut.Service
         }
 
         public ServiceResult<string> Create<TModel>(TModel model, 
-            string userId = null,
+            string userId,
             string userIp = null)
         {
             var result = _crudService.Create(model);
@@ -43,7 +43,8 @@ namespace Alamut.Service
             var history = new BaseHistory
             {
                 Action = HistoryActions.Create,
-                UserId = userId ?? ((model is IUserEntity) ? (model as IUserEntity).UserId : null),
+                //UserId = userId ?? ((model is IUserEntity) ? (model as IUserEntity).UserId : null),
+                UserId = userId,
                 CreateDate = DateTime.Now,
                 EntityId = result.Data,
                 EntityName = typeof(TDocument).Name,
@@ -58,7 +59,7 @@ namespace Alamut.Service
         }
 
         public ServiceResult Update<TModel>(string id, TModel model,
-            string userId = null,
+            string userId,
             string userIp = null)
         {
             var result = _crudService.Update(id, model);
@@ -69,7 +70,8 @@ namespace Alamut.Service
             var history = new BaseHistory
             {
                 Action = HistoryActions.Update,
-                UserId = userId ?? ((model is IUserEntity) ? (model as IUserEntity).UserId : null),
+                //UserId = userId ?? ((model is IUserEntity) ? (model as IUserEntity).UserId : null),
+                UserId = userId,
                 CreateDate = DateTime.Now,
                 EntityId = id,
                 EntityName = typeof(TDocument).Name,

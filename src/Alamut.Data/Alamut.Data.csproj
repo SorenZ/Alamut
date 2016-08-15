@@ -75,6 +75,7 @@
     <Compile Include="Structure\IdTitleInternalCode.cs" />
     <Compile Include="Structure\IdTitlePublishedDate.cs" />
     <Compile Include="Structure\IdValue.cs" />
+    <Compile Include="Structure\IHasParent.cs" />
     <Compile Include="Structure\IIdBased.cs" />
     <Compile Include="Structure\ServiceResult.cs" />
   </ItemGroup>

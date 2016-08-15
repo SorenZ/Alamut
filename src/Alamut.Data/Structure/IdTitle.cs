@@ -12,5 +12,8 @@
         public string Title { get; set; }
     }
 
-
+    public interface IHierarchy
+    {
+        
+    }
 }

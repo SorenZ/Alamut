@@ -48,7 +48,7 @@ namespace Alamut.Service
             get { return this._repository; }
         }
 
-        protected IRepository<TDocument> BaseRepository
+        protected IRepository<TDocument> Repository
         {
             get { return this._repository; }
         }
@@ -70,6 +70,11 @@ namespace Alamut.Service
         public ServiceResult Update<TModel>(string id, TModel model)
         {
             return _crudService.Update(id, model);
+        }
+
+        public ServiceResult UpdateOne<TField>(string id, Expression<Func<TDocument, TField>> memberExpression, TField value)
+        {
+            return _crudService.UpdateOne(id, memberExpression, value);
         }
 
         public ServiceResult Delete(string id)
@@ -96,12 +101,12 @@ namespace Alamut.Service
 
         #region IHistoryService
 
-        public ServiceResult<string> Create<TModel>(TModel model, string userId = null, string userIp = null)
+        public ServiceResult<string> Create<TModel>(TModel model, string userId, string userIp = null)
         {
             return _historyService.Create(model, userId, userIp);
         }
 
-        public ServiceResult Update<TModel>(string id, TModel model, string userId = null, string userIp = null)
+        public ServiceResult Update<TModel>(string id, TModel model, string userId, string userIp = null)
         {
             return _historyService.Update(id, model, userId, userIp);
         }

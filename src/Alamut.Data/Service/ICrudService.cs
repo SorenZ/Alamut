@@ -33,6 +33,21 @@ namespace Alamut.Data.Service
         /// <returns></returns>
         ServiceResult Update<TModel>(string id, TModel model);
 
+
+        /// <summary>
+        /// update an item (one field) by expression member selector by id
+        /// </summary>
+        /// <typeparam name="TField"></typeparam>
+        /// <param name="id"></param>
+        /// <param name="memberExpression"></param>
+        /// <param name="value"></param>
+        /// <remarks>
+        /// Even if multiple documents match the filter, only one will be updated because we used UpdateOne
+        /// </remarks>
+        ServiceResult UpdateOne<TField>(string id,
+            Expression<Func<TDocument, TField>> memberExpression,
+            TField value);
+
         /// <summary>
         /// delete item by Id
         /// </summary>

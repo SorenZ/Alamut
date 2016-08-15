@@ -37,7 +37,7 @@ namespace Alamut.Service
 
             try
             {
-                base.BaseRepository.Create(entity);
+                base.Repository.Create(entity);
             }
             catch (Exception ex)
             {
@@ -49,7 +49,7 @@ namespace Alamut.Service
 
         public virtual ServiceResult Update<TModel>(string id, TModel model)
         {
-            var entity = base.BaseRepository.Get(id);
+            var entity = base.Repository.Get(id);
 
             if (entity == null)
                 return ServiceResult.Error("There is no entity with Id : " + id, 404);
@@ -59,7 +59,21 @@ namespace Alamut.Service
 
             try
             {
-                base.BaseRepository.Update(Mapper.Map(model, entity));
+                base.Repository.Update(Mapper.Map(model, entity));
+            }
+            catch (Exception ex)
+            {
+                return ServiceResult<string>.Exception(ex);
+            }
+
+            return ServiceResult.Okay();
+        }
+
+        public ServiceResult UpdateOne<TField>(string id, Expression<Func<TDocument, TField>> memberExpression, TField value)
+        {
+            try
+            {
+                base.Repository.UpdateOne(id, memberExpression,value);
             }
             catch (Exception ex)
             {
@@ -76,7 +90,7 @@ namespace Alamut.Service
 
             try
             {
-                base.BaseRepository.Delete(id);
+                base.Repository.Delete(id);
             }
             catch (Exception ex)
             {
@@ -88,7 +102,7 @@ namespace Alamut.Service
 
         public virtual TResult Get<TResult>(string id)
         {
-            return base.BaseRepository.Queryable
+            return base.Repository.Queryable
                 .Where(q => q.Id == id)
                 .ProjectTo<TResult>(this.Mapper.ConfigurationProvider)
                 .FirstOrDefault();
@@ -96,7 +110,7 @@ namespace Alamut.Service
 
         public List<TResult> GetMany<TResult>(IEnumerable<string> ids)
         {
-            return base.BaseRepository.Queryable
+            return base.Repository.Queryable
                 .Where(q => ids.Contains(q.Id))
                 .ProjectTo<TResult>(this.Mapper.ConfigurationProvider)
                 .ToList();
@@ -104,7 +118,7 @@ namespace Alamut.Service
 
         public List<TResult> GetMany<TResult>(Expression<Func<TDocument, bool>> predicate)
         {
-            return base.BaseRepository.Queryable
+            return base.Repository.Queryable
                 .Where(predicate)
                 .ProjectTo<TResult>(this.Mapper.ConfigurationProvider)
                 .ToList();
@@ -118,11 +132,11 @@ namespace Alamut.Service
         where TRepository : class, IRepository<TDocument>
     {
 
-        [Obsolete("It will remove in version 3-*, user explicit repository in your onwn service")]
-        protected TRepository Repository
-        {
-            get { return InternalRepository as TRepository; }
-        }
+        //[Obsolete("It will remove in version 3-*, user explicit repository in your onwn service")]
+        //protected TRepository Repository
+        //{
+        //    get { return InternalRepository as TRepository; }
+        //}
 
         protected IMapper Mapper { get; private set; }
 
@@ -174,6 +188,11 @@ namespace Alamut.Service
             }
 
             return ServiceResult.Okay();
+        }
+
+        public ServiceResult UpdateOne<TField>(string id, Expression<Func<TDocument, TField>> memberExpression, TField value)
+        {
+            throw new NotImplementedException();
         }
 
         public virtual ServiceResult Delete(string id)

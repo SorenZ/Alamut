@@ -66,7 +66,7 @@ namespace Alamut.Data.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <param name="fieldset"></param>
-        [Obsolete("it's not recomended")]
+        [Obsolete("it's not recommended")]
         void GenericUpdate(string id, Dictionary<string, dynamic> fieldset);
         
         /// <summary>
